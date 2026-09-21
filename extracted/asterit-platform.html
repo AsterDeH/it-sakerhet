@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AsterIT – IT-Säkerhet & Cybersäkerhet</title>
+<style>
+:root{
+  --bg:#080f1e;--card:#0f2040;--accent:#00d4ff;--accent2:#7c3aed;
+  --green:#10b981;--danger:#ef4444;--warn:#f59e0b;
+  --text:#f1f5f9;--muted:#c8d6e8;--border:rgba(0,212,255,0.15);
+  --grad:linear-gradient(135deg,#00d4ff,#7c3aed);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,15,30,0.96);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.1);
+  height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:800;}
+.logo-icon{width:38px;height:38px;border-radius:9px;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:1.5rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;cursor:pointer;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-btn{background:var(--grad);color:#fff;border:none;padding:0.45rem 1.2rem;border-radius:8px;font-weight:600;font-size:0.88rem;cursor:pointer;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:100px 2rem 60px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,212,255,0.07) 0%,transparent 60%);}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);
+  padding:5px 14px;border-radius:50px;font-size:0.78rem;color:var(--accent);
+  margin-bottom:1.5rem;font-weight:600;}
+.hero-badge::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--accent);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+h1{font-size:clamp(2.2rem,5vw,4.5rem);font-weight:900;line-height:1.1;
+  letter-spacing:-2px;margin-bottom:1.2rem;}
+.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:650px;margin:0 auto 2rem;line-height:1.7;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--grad);color:#fff;border:none;padding:0.85rem 1.8rem;
+  border-radius:12px;font-weight:700;font-size:0.95rem;cursor:pointer;
+  box-shadow:0 0 30px rgba(0,212,255,0.3);transition:all 0.2s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,212,255,0.5);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.2);
+  padding:0.85rem 1.8rem;border-radius:12px;font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+.stats{display:flex;gap:2.5rem;justify-content:center;margin-top:3.5rem;flex-wrap:wrap;}
+.stat-num{font-size:1.8rem;font-weight:800;background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-lbl{font-size:0.78rem;color:var(--muted);margin-top:3px;}
+
+/* SECTIONS */
+section{padding:70px 2rem;position:relative;}
+.container{max-width:1180px;margin:0 auto;}
+.sec-tag{display:inline-block;background:rgba(0,212,255,0.1);
+  border:1px solid rgba(0,212,255,0.2);color:var(--accent);
+  padding:3px 12px;border-radius:50px;font-size:0.72rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;}
+.sec-title{font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:800;
+  letter-spacing:-1px;margin-bottom:0.8rem;}
+.sec-sub{color:var(--muted);font-size:0.97rem;max-width:600px;margin:0 auto;line-height:1.7;}
+.sec-header{text-align:center;margin-bottom:2.5rem;}
+
+/* COURSE CARDS */
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
+.course-card{background:var(--card);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;cursor:pointer;transition:all 0.3s;}
+.course-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.4),0 0 25px rgba(0,212,255,0.08);}
+.course-img{width:100%;height:180px;object-fit:cover;display:block;}
+.course-img-ph{width:100%;height:180px;display:flex;align-items:center;
+  justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,#0f2040,#1a0a3e);}
+.course-body{padding:1.3rem;}
+.badges{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.7rem;}
+.badge-sm{padding:2px 9px;border-radius:50px;font-size:0.7rem;font-weight:700;}
+.b-blue{background:rgba(0,212,255,0.12);color:var(--accent);border:1px solid rgba(0,212,255,0.25);}
+.b-green{background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.25);}
+.b-purple{background:rgba(124,58,237,0.12);color:#a78bfa;border:1px solid rgba(124,58,237,0.25);}
+.b-orange{background:rgba(245,158,11,0.12);color:var(--warn);border:1px solid rgba(245,158,11,0.25);}
+.b-red{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.25);}
+.course-body h3{font-size:1rem;font-weight:700;margin-bottom:0.4rem;line-height:1.3;color:var(--text);}
+.course-body p{color:var(--muted);font-size:0.85rem;line-height:1.6;margin-bottom:0.9rem;}
+.course-footer{display:flex;align-items:center;justify-content:space-between;
+  padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.05);}
+.course-meta{display:flex;gap:0.8rem;}
+.course-meta span{font-size:0.78rem;color:var(--muted);}
+.btn-start{background:var(--grad);color:#fff;border:none;padding:0.4rem 1rem;
+  border-radius:7px;font-weight:600;font-size:0.8rem;cursor:pointer;}
+
+/* LESSON VIEWER */
+.lesson-overlay{position:fixed;inset:0;z-index:500;background:rgba(4,9,20,0.95);
+  backdrop-filter:blur(14px);display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.lesson-overlay.open{opacity:1;pointer-events:all;}
+.lesson-topbar{height:58px;background:rgba(8,15,30,0.97);
+  border-bottom:1px solid rgba(0,212,255,0.1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.5rem;flex-shrink:0;gap:1rem;}
+.lesson-back{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  color:var(--text);padding:0.38rem 1rem;border-radius:7px;
+  font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.lesson-back:hover{border-color:var(--accent);color:var(--accent);}
+.lesson-title-bar{font-size:0.85rem;color:var(--muted);flex:1;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lesson-body{display:flex;flex:1;overflow:hidden;}
+.lesson-sidebar{width:280px;background:rgba(8,15,30,0.8);
+  border-right:1px solid rgba(255,255,255,0.05);overflow-y:auto;flex-shrink:0;}
+.lesson-sidebar-hdr{padding:0.9rem 1.1rem;border-bottom:1px solid rgba(255,255,255,0.05);
+  font-size:0.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;}
+.lesson-sb-item{display:flex;align-items:center;gap:9px;padding:0.7rem 1.1rem;
+  cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;}
+.lesson-sb-item:hover{background:rgba(0,212,255,0.04);}
+.lesson-sb-item.active{background:rgba(0,212,255,0.07);border-left-color:var(--accent);}
+.lesson-sb-num{min-width:24px;height:24px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;flex-shrink:0;}
+.sb-done{background:linear-gradient(135deg,#10b981,#059669);color:#fff;}
+.sb-cur{background:var(--grad);color:#fff;}
+.sb-free{background:rgba(0,212,255,0.12);color:var(--accent);border:1px solid rgba(0,212,255,0.25);}
+.lesson-sb-name{font-size:0.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lesson-sb-dur{font-size:0.7rem;color:var(--muted);}
+.lesson-main{flex:1;overflow-y:auto;padding:2rem;}
+.lesson-content{max-width:820px;margin:0 auto;}
+
+/* LESSON CONTENT STYLES */
+.lc-tag{display:inline-flex;align-items:center;gap:5px;
+  background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);
+  color:var(--accent);padding:3px 11px;border-radius:50px;
+  font-size:0.72rem;font-weight:700;margin-bottom:0.7rem;}
+.lc-title{font-size:1.8rem;font-weight:800;letter-spacing:-0.5px;
+  margin-bottom:0.8rem;line-height:1.2;color:var(--text);}
+.lc-meta{display:flex;gap:1rem;color:var(--muted);font-size:0.82rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.lc-intro{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(124,58,237,0.08));
+  border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:1.8rem;margin-bottom:2rem;}
+.lc-intro-label{font-size:0.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;}
+.lc-intro-title{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;}
+.lc-intro-desc{color:var(--muted);font-size:0.88rem;line-height:1.6;}
+.lc-section{margin-bottom:2rem;}
+.lc-section h2{font-size:1.15rem;font-weight:700;margin-bottom:1rem;
+  color:var(--text);border-bottom:1px solid rgba(0,212,255,0.15);padding-bottom:0.5rem;}
+.lc-section p{color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:0.9rem;}
+.lc-section ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;}
+.lc-section li{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:0.93rem;line-height:1.7;}
+.lc-section li::before{content:"→";color:var(--accent);font-weight:700;flex-shrink:0;margin-top:2px;}
+.lc-h3{font-size:1rem;font-weight:700;color:var(--accent);margin:1.2rem 0 0.6rem;}
+.lc-callout{border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+.lc-callout-blue{background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-left:4px solid var(--accent);}
+.lc-callout-red{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-left:4px solid var(--danger);}
+.lc-callout-green{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-left:4px solid var(--green);}
+.lc-callout-warn{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-left:4px solid var(--warn);}
+.lc-callout h4{font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;}
+.lc-callout p{color:var(--muted);font-size:0.88rem;line-height:1.7;margin:0;}
+.lc-table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:0.88rem;}
+.lc-table th{background:rgba(0,212,255,0.1);color:var(--accent);padding:0.6rem 0.9rem;text-align:left;font-weight:700;}
+.lc-table td{padding:0.6rem 0.9rem;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--muted);}
+.lc-table tr:hover td{background:rgba(255,255,255,0.02);}
+.lc-quiz{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;}
+.lc-quiz-title{font-size:0.95rem;font-weight:700;margin-bottom:1rem;color:var(--text);}
+.lc-quiz-q{font-size:0.92rem;font-weight:600;margin-bottom:0.9rem;line-height:1.5;color:var(--text);}
+.lc-quiz-opts{display:flex;flex-direction:column;gap:0.5rem;}
+.lc-quiz-opt{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  border-radius:9px;padding:0.7rem 0.9rem;cursor:pointer;
+  font-size:0.88rem;text-align:left;color:var(--text);transition:all 0.2s;width:100%;}
+.lc-quiz-opt:hover{border-color:var(--accent);background:rgba(0,212,255,0.04);}
+.lc-quiz-opt.ok{border-color:var(--green);background:rgba(16,185,129,0.1);color:var(--green);}
+.lc-quiz-opt.bad{border-color:var(--danger);background:rgba(239,68,68,0.1);color:#fca5a5;}
+.lc-quiz-fb{margin-top:0.7rem;padding:0.7rem 0.9rem;border-radius:8px;font-size:0.85rem;display:none;}
+.lc-quiz-fb.show{display:block;}
+.lc-quiz-fb.ok{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:var(--green);}
+.lc-quiz-fb.bad{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;}
+.btn-done{width:100%;padding:0.9rem;background:var(--grad);border:none;
+  border-radius:12px;color:#fff;font-size:0.95rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;box-shadow:0 0 25px rgba(0,212,255,0.25);margin-top:1rem;}
+.btn-done:hover{box-shadow:0 0 45px rgba(0,212,255,0.45);transform:translateY(-2px);}
+
+/* SIMULATOR */
+.sim-wrap{background:var(--card);border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;max-width:860px;margin:0 auto;}
+.sim-bar{background:rgba(0,0,0,0.3);padding:1rem 1.3rem;
+  display:flex;align-items:center;gap:0.8rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.sim-dots{display:flex;gap:5px;}
+.sim-dot{width:11px;height:11px;border-radius:50%;}
+.sim-body{padding:1.5rem;}
+.sim-tabs{display:flex;gap:0.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.sim-tab{padding:0.45rem 1rem;border-radius:7px;border:1px solid rgba(255,255,255,0.1);
+  background:transparent;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.sim-tab.active,.sim-tab:hover{background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent);}
+.sim-content{min-height:280px;}
+.sim-email{background:rgba(255,255,255,0.02);border-radius:14px;
+  border:1px solid rgba(255,255,255,0.07);overflow:hidden;}
+.sim-email-hdr{background:rgba(0,0,0,0.2);padding:0.9rem 1.3rem;
+  border-bottom:1px solid rgba(255,255,255,0.05);}
+.sim-field{display:flex;gap:0.5rem;margin-bottom:0.25rem;font-size:0.82rem;}
+.sim-field strong{color:var(--muted);min-width:45px;}
+.sim-email-body{padding:1.3rem;font-size:0.87rem;line-height:1.7;color:var(--muted);}
+.hl{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);
+  border-radius:4px;padding:1px 5px;color:#fca5a5;cursor:help;position:relative;}
+.hl:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;
+  transform:translateX(-50%);background:#1e293b;border:1px solid rgba(239,68,68,0.3);
+  color:#fca5a5;padding:5px 9px;border-radius:7px;font-size:0.74rem;
+  white-space:nowrap;z-index:10;pointer-events:none;}
+.sim-warns{margin-top:1.2rem;display:flex;flex-direction:column;gap:0.5rem;}
+.sim-warn{display:flex;gap:8px;background:rgba(239,68,68,0.07);
+  border:1px solid rgba(239,68,68,0.18);border-radius:9px;
+  padding:0.7rem 0.9rem;font-size:0.82rem;}
+.sim-warn p{color:#fca5a5;}
+
+/* QUIZ */
+.quiz-wrap{background:var(--card);border:1px solid var(--border);
+  border-radius:22px;padding:2rem;max-width:680px;margin:0 auto;}
+.quiz-prog{height:4px;background:rgba(255,255,255,0.07);border-radius:2px;
+  margin-bottom:1.8rem;overflow:hidden;}
+.quiz-prog-fill{height:100%;background:var(--grad);transition:width 0.4s;}
+.quiz-q{font-size:1rem;font-weight:700;margin-bottom:1.2rem;line-height:1.5;color:var(--text);}
+.quiz-opts{display:flex;flex-direction:column;gap:0.6rem;}
+.quiz-opt{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;padding:0.8rem 1rem;cursor:pointer;font-size:0.87rem;
+  text-align:left;color:var(--text);transition:all 0.2s;width:100%;}
+.quiz-opt:hover{border-color:var(--accent);background:rgba(0,212,255,0.05);}
+.quiz-opt.correct{border-color:var(--green);background:rgba(16,185,129,0.1);color:var(--green);}
+.quiz-opt.wrong{border-color:var(--danger);background:rgba(239,68,68,0.1);color:#fca5a5;}
+.quiz-fb{margin-top:0.8rem;padding:0.8rem 1rem;border-radius:8px;font-size:0.84rem;display:none;}
+.quiz-fb.show{display:block;}
+.quiz-fb.ok{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:var(--green);}
+.quiz-fb.bad{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;}
+.quiz-ctr{font-size:0.82rem;color:var(--muted);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+  background:var(--card);border:1px solid rgba(0,212,255,0.25);
+  border-radius:12px;padding:0.9rem 1.3rem;
+  display:flex;align-items:center;gap:0.7rem;
+  box-shadow:0 15px 50px rgba(0,0,0,0.5);
+  transform:translateX(120%);transition:transform 0.35s ease;max-width:300px;}
+.toast.show{transform:translateX(0);}
+.toast-title{font-weight:700;font-size:0.85rem;display:block;margin-bottom:2px;}
+.toast-msg{font-size:0.78rem;color:var(--muted);}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;}
+.stars{color:#f59e0b;margin-bottom:0.8rem;}
+.testi-text{color:var(--muted);font-size:0.88rem;line-height:1.7;margin-bottom:1.2rem;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:0.7rem;}
+.testi-av{width:40px;height:40px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:#fff;}
+.testi-name{font-weight:700;font-size:0.87rem;}
+.testi-role{font-size:0.75rem;color:var(--muted);}
+
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,rgba(0,212,255,0.07),rgba(124,58,237,0.07));
+  border-top:1px solid rgba(0,212,255,0.1);border-bottom:1px solid rgba(0,212,255,0.1);
+  text-align:center;padding:90px 2rem;}
+.cta-sec h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.8rem;}
+.cta-sec p{color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto 2rem;line-height:1.7;}
+
+/* FOOTER */
+footer{background:rgba(4,9,20,0.9);border-top:1px solid rgba(255,255,255,0.05);padding:2.5rem 2rem 1.5rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;max-width:1180px;margin:0 auto 2rem;}
+.footer-brand p{color:var(--muted);font-size:0.84rem;line-height:1.7;margin-top:0.8rem;max-width:280px;}
+.footer-col h4{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:0.8rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.footer-col a{color:var(--muted);text-decoration:none;font-size:0.84rem;transition:color 0.2s;cursor:pointer;}
+.footer-col a:hover{color:var(--accent);}
+.footer-bottom{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;
+  align-items:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:0.8rem;}
+.footer-bottom p{color:var(--muted);font-size:0.78rem;}
+.footer-badges{display:flex;gap:0.4rem;}
+.footer-badge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  padding:3px 9px;border-radius:5px;font-size:0.72rem;color:var(--muted);}
+
+/* PROGRESS */
+.prog-wrap{flex:1;max-width:260px;height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;}
+.prog-bar{height:100%;background:var(--grad);border-radius:3px;transition:width 0.4s;}
+.prog-lbl{font-size:0.74rem;color:var(--muted);white-space:nowrap;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .lesson-sidebar{display:none;}
+  .footer-grid{grid-template-columns:1fr;}
+  .lesson-main{padding:1rem;}
+}
+</style>
+</head>
+<body>
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div><strong class="toast-title" id="toast-title">Info</strong><span class="toast-msg" id="toast-msg"></span></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><div class="logo-icon">🛡️</div><span>AsterIT</span></div>
+  <div class="nav-links">
+    <a onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Utbildningar</a>
+    <a onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'})">Simulator</a>
+    <a onclick="document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'})">Kunskapstest</a>
+  </div>
+  <button class="nav-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Utforska kurser</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">🔴 LIVE – Baserat på verkligt utbildningsmaterial</div>
+    <h1>IT-säkerhet &amp;<br><span class="grad-text">Cybersäkerhet</span></h1>
+    <p>En komplett introduktion till digital säkerhet, hotbilder och skyddsåtgärder. Lär dig skydda dig mot malware, phishing, ransomware och andra moderna cyberhot.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openLesson('intro',0)">🚀 Starta utbildning</button>
+      <button class="btn-outline" onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'})">🎯 Testa simulatorn</button>
+    </div>
+    <div class="stats">
+      <div><div class="stat-num">8</div><div class="stat-lbl">Utbildningsmoduler</div></div>
+      <div><div class="stat-num">50</div><div class="stat-lbl">Simulationsfrågor</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-lbl">Gratis tillgång</div></div>
+      <div><div class="stat-num">🇸🇪</div><div class="stat-lbl">På svenska</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses" style="background:rgba(15,32,64,0.25);">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-tag">📚 Utbildningsmoduler</div>
+      <h2 class="sec-title">Komplett IT-säkerhetsutbildning</h2>
+      <p class="sec-sub">Alla moduler är baserade på verkligt utbildningsmaterial och täcker de viktigaste områdena inom IT-säkerhet och cybersäkerhet.</p>
+    </div>
+    <div class="courses-grid">
+
+      <div class="course-card" onclick="openLesson('intro',0)">
+        <div class="course-img-ph">🛡️</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-green">Nybörjare</span><span class="badge-sm b-blue">Start här</span></div>
+          <h3>Introduktion till IT-säkerhet</h3>
+          <p>Vad är IT-säkerhet och cybersäkerhet? CIA-triaden, grundläggande principer och varför det är viktigt.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 20 min</span><span>📖 3 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('intro',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('malware',0)">
+        <div class="course-img-ph">🦠</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-orange">Medel</span></div>
+          <h3>Malware – Skadlig programvara</h3>
+          <p>Virus, maskar, trojaner, spyware och ransomware. Hur de fungerar och hur du skyddar dig.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 25 min</span><span>📖 4 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('malware',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('phishing',0)">
+        <div class="course-img-ph">🎣</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-red">Viktigt</span><span class="badge-sm b-blue">Populär</span></div>
+          <h3>Phishing &amp; Social ingenjörskonst</h3>
+          <p>Alla typer av phishingattacker: e-post, SMS, telefon, QR-koder och sociala medier. Varningssignaler och skydd.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 30 min</span><span>📖 5 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('phishing',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('ransomware',0)">
+        <div class="course-img-ph">💀</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-red">Avancerad</span></div>
+          <h3>Ransomware – Skydd &amp; Åtgärder</h3>
+          <p>Hur ransomware fungerar, 3-2-1-principen för säkerhetskopiering och konkreta skyddsåtgärder.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 25 min</span><span>📖 4 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('ransomware',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('natverk',0)">
+        <div class="course-img-ph">🌐</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-purple">Nätverk</span></div>
+          <h3>Nätverksintrång &amp; Attacker</h3>
+          <p>Man-in-the-Middle, DDoS-attacker, exploatering av sårbarheter och Zero-Day-attacker.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 20 min</span><span>📖 3 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('natverk',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('insider',0)">
+        <div class="course-img-ph">👤</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-orange">Medel</span></div>
+          <h3>Insiderhot &amp; Fysisk säkerhet</h3>
+          <p>Avsiktliga och oavsiktliga insiderhot, fysiska säkerhetsrisker och hur organisationer skyddar sig.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 20 min</span><span>📖 3 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('insider',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('sakerhet',0)">
+        <div class="course-img-ph">🔐</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-green">Grundläggande</span></div>
+          <h3>Säkerhetsmedvetenhet</h3>
+          <p>Utbildning, lösenordshantering, MFA, molntjänster och rapportering av incidenter.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 20 min</span><span>📖 3 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('sakerhet',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openLesson('samhalle',0)">
+        <div class="course-img-ph">🏛️</div>
+        <div class="course-body">
+          <div class="badges"><span class="badge-sm b-blue">Samhälle</span></div>
+          <h3>Cybersäkerhetens roll i samhället</h3>
+          <p>Kritisk infrastruktur, ekonomi, nationell säkerhet och personlig integritet i det digitala samhället.</p>
+          <div class="course-footer">
+            <div class="course-meta"><span>⏱ 15 min</span><span>📖 3 avsnitt</span></div>
+            <button class="btn-start" onclick="event.stopPropagation();openLesson('samhalle',0)">Starta</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMULATOR -->
+<section id="simulator" style="background:rgba(15,32,64,0.3);">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-tag">🎯 Interaktiv Simulator</div>
+      <h2 class="sec-title">Träna mot verkliga hot</h2>
+      <p class="sec-sub">Upplev och identifiera cyberhot utan risk i vår säkra sandlådemiljö.</p>
+    </div>
+    <div class="sim-wrap">
+      <div class="sim-bar">
+        <div class="sim-dots">
+          <div class="sim-dot" style="background:#ef4444"></div>
+          <div class="sim-dot" style="background:#f59e0b"></div>
+          <div class="sim-dot" style="background:#10b981"></div>
+        </div>
+        <span style="font-size:0.82rem;color:var(--muted);">🛡️ AsterIT Hotsimulator – Säker sandlåda</span>
+      </div>
+      <div class="sim-body">
+        <div class="sim-tabs">
+          <button class="sim-tab active" onclick="switchSim('phishing',this)">🎣 Phishing-mejl</button>
+          <button class="sim-tab" onclick="switchSim('smishing',this)">📱 SMS-bedrägeri</button>
+          <button class="sim-tab" onclick="switchSim('vd',this)">👔 VD-bedrägeri</button>
+          <button class="sim-tab" onclick="switchSim('qr',this)">📷 QR-phishing</button>
+          <button class="sim-tab" onclick="switchSim('ransomware',this)">💀 Ransomware</button>
+        </div>
+        <div class="sim-content" id="sim-content">
+          <div class="sim-email">
+            <div class="sim-email-hdr">
+              <div class="sim-field"><strong>Från:</strong> <span class="hl" data-tip="Falsk domän! Inte microsoft.com">noreply@<span style="color:#ef4444">microsoft-support.net</span></span></div>
+              <div class="sim-field"><strong>Till:</strong> din.epost@foretag.se</div>
+              <div class="sim-field"><strong>Ämne:</strong> <span class="hl" data-tip="Skapar stress och tidspress – klassisk phishingtaktik">⚠️ BRÅDSKANDE: Ditt Microsoft 365-lösenord löper ut om 24 timmar</span></div>
+            </div>
+            <div class="sim-email-body">
+              <p>Kära användare,</p><br>
+              <p>Vi har <span class="hl" data-tip="Opersonlig hälsning – Microsoft använder alltid ditt namn">upptäckt att ditt konto</span> kräver omedelbar verifiering.</p><br>
+              <p>Klicka på länken nedan för att <span class="hl" data-tip="Banker och Microsoft ber ALDRIG om lösenord via e-post">uppdatera ditt lösenord</span>:</p><br>
+              <p>👉 <span class="hl" data-tip="Falsk URL! Hovra alltid för att se verklig destination">www.microsoft-support.net/verify/login</span></p><br>
+              <p>Om du inte agerar inom <span class="hl" data-tip="Tidsgräns skapar panik – du ska inte hinna tänka">24 timmar</span> stängs ditt konto permanent.</p>
+            </div>
+          </div>
+          <div class="sim-warns">
+            <div class="sim-warn"><span>🔴</span><p><strong>Varning 1:</strong> Avsändardomänen "microsoft-support.net" är INTE Microsofts officiella domän (microsoft.com).</p></div>
+            <div class="sim-warn"><span>🔴</span><p><strong>Varning 2:</strong> Falsk brådska ("24 timmar") hindrar dig från att tänka klart. Legitima företag gör inte detta.</p></div>
+            <div class="sim-warn"><span>🔴</span><p><strong>Varning 3:</strong> Gå alltid direkt till microsoft.com – aldrig via e-postlänkar.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-sec" style="background:rgba(10,22,40,0.4);">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-tag">🧠 Kunskapstest</div>
+      <h2 class="sec-title">Testa dina kunskaper</h2>
+      <p class="sec-sub">50 frågor baserade på det verkliga utbildningsmaterialet. Direkt feedback på varje svar.</p>
+    </div>
+    <div class="quiz-wrap">
+      <div class="quiz-prog"><div class="quiz-prog-fill" id="qprog" style="width:2%"></div></div>
+      <div class="quiz-q" id="qq">Fråga 1/50: Vad är CIA-triaden inom informationssäkerhet?</div>
+      <div class="quiz-opts" id="qopts">
+        <button class="quiz-opt" onclick="doQ(this,false)">En organisation som arbetar med cybersäkerhet</button>
+        <button class="quiz-opt" onclick="doQ(this,true)">Konfidentialitet, Integritet och Tillgänglighet</button>
+        <button class="quiz-opt" onclick="doQ(this,false)">En typ av krypteringsalgoritm</button>
+        <button class="quiz-opt" onclick="doQ(this,false)">Central Intelligence Agency</button>
+      </div>
+      <div class="quiz-fb" id="qfb"></div>
+      <div class="quiz-nav">
+        <span class="quiz-ctr" id="qctr">Fråga 1 av 50</span>
+        <button class="btn-primary" id="qnext" onclick="nextQ()" style="display:none;padding:0.5rem 1.3rem;font-size:0.85rem;">Nästa →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:rgba(15,32,64,0.2);">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-tag">💬 Omdömen</div>
+      <h2 class="sec-title">Vad våra användare säger</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <div class="testi-text">"AsterIT förändrade hur jag tänker kring digital säkerhet. Kursen om phishing var ögonöppnande – jag visste inte hur sofistikerade attackerna har blivit. Nu känner jag mig trygg online."</div>
+        <div class="testi-author"><div class="testi-av">JM</div><div><div class="testi-name">James Mitchell</div><div class="testi-role">Privatperson, London</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <div class="testi-text">"Utmärkt utbildningsmaterial! Förklaringarna om skillnaden mellan virus och maskar, och hur ransomware fungerar, var tydliga och lättförståeliga. Rekommenderas varmt."</div>
+        <div class="testi-author"><div class="testi-av">SL</div><div><div class="testi-name">Sophie Laurent</div><div class="testi-role">Privatperson, Paris</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <div class="testi-text">"Simulatorn för phishing-attacker var fantastisk! Att se varningssignalerna i ett verkligt mejl och förstå varför de är farliga gav mig konkreta verktyg att använda varje dag."</div>
+        <div class="testi-author"><div class="testi-av">MR</div><div><div class="testi-name">Marco Rossi</div><div class="testi-role">Privatperson, Milano</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="sec-tag">🚀 Kom igång idag</div>
+  <h2>Börja din <span class="grad-text">säkerhetsutbildning</span> nu</h2>
+  <p>Utforska alla 8 moduler med verkligt utbildningsmaterial om IT-säkerhet och cybersäkerhet.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="openLesson('intro',0)">🛡️ Starta utbildning</button>
+    <button class="btn-outline" onclick="document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'})">🧠 Testa dina kunskaper</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><div class="logo-icon">🛡️</div><span>AsterIT</span></div>
+      <p>Professionell IT-säkerhetsutbildning baserad på verkligt utbildningsmaterial för privatpersoner och organisationer.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Utbildningar</h4>
+      <ul>
+        <li><a onclick="openLesson('intro',0)">Introduktion till IT-säkerhet</a></li>
+        <li><a onclick="openLesson('malware',0)">Malware & Skadlig kod</a></li>
+        <li><a onclick="openLesson('phishing',0)">Phishing & Social manipulation</a></li>
+        <li><a onclick="openLesson('ransomware',0)">Ransomware & Skydd</a></li>
+        <li><a onclick="openLesson('natverk',0)">Nätverksintrång</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Plattform</h4>
+      <ul>
+        <li><a onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'})">Hotsimulator</a></li>
+        <li><a onclick="document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'})">Kunskapstest</a></li>
+        <li><a href="#">Om AsterIT</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Integritetspolicy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 AsterIT AB. Alla rättigheter förbehållna.</p>
+    <div class="footer-badges">
+      <span class="footer-badge">🔒 ISO 27001</span>
+      <span class="footer-badge">✅ GDPR-kompatibel</span>
+      <span class="footer-badge">🇸🇪 Svensk tjänst</span>
+    </div>
+  </div>
+</footer>
+
+<!-- LESSON VIEWER -->
+<div class="lesson-overlay lesson-overlay" id="lessonViewer">
+  <div class="lesson-topbar">
+    <button class="lesson-back" onclick="closeLesson()">← Tillbaka</button>
+    <div class="lesson-title-bar" id="lesson-title-bar">Utbildning</div>
+    <div style="display:flex;align-items:center;gap:0.6rem;">
+      <div class="prog-wrap"><div class="prog-bar" id="lesson-prog" style="width:0%"></div></div>
+      <div class="prog-lbl" id="lesson-prog-lbl">0/0</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+    <div class="lesson-sidebar">
+      <div class="lesson-sidebar-hdr">📋 Avsnitt</div>
+      <div id="lesson-sidebar"></div>
+    </div>
+    <div class="lesson-main" id="lesson-main"></div>
+  </div>
+
+<script>
+// UTILITIES
+var _tt;
+function showToast(t,m){
+  document.getElementById('toast-title').textContent=t;
+  document.getElementById('toast-msg').textContent=m;
+  var el=document.getElementById('toast');
+  el.classList.add('show');
+  clearTimeout(_tt);
+  _tt=setTimeout(function(){el.classList.remove('show');},3500);
+}
+
+// SIMULATOR
+var simData={
+  phishing:'<div class="sim-email"><div class="sim-email-hdr"><div class="sim-field"><strong>Fr&aring;n:</strong> <span class="hl" data-tip="Falsk dom&auml;n! Inte microsoft.com">noreply@<span style=color:#ef4444>microsoft-support.net</span></span></div><div class="sim-field"><strong>&Auml;mne:</strong> <span class="hl" data-tip="Skapar stress och tidspress">BRUDSKANDE: L&ouml;senord l&ouml;per ut om 24h</span></div></div><div class="sim-email-body"><p>K&auml;ra anv&auml;ndare,</p><br><p>Klicka h&auml;r: <span class="hl" data-tip="Falsk URL!">www.microsoft-support.net/verify</span></p><br><p>Agera inom <span class="hl" data-tip="Tidsgr&auml;ns skapar panik">24 timmar</span>.</p></div></div><div class="sim-warns"><div class="sim-warn"><span>&#128308;</span><p><strong>Varning 1:</strong> Dom&auml;nen "microsoft-support.net" &auml;r INTE Microsofts officiella dom&auml;n.</p></div><div class="sim-warn"><span>&#128308;</span><p><strong>Varning 2:</strong> Falsk br&aring;dska hindrar dig fr&aring;n att t&auml;nka klart.</p></div><div class="sim-warn"><span>&#128308;</span><p><strong>Varning 3:</strong> G&aring; alltid direkt till microsoft.com &ndash; aldrig via e-postl&auml;nkar.</p></div></div>',
+  smishing:'<div class="sim-email"><div class="sim-email-hdr"><div class="sim-field"><strong>Fr&aring;n:</strong> <span class="hl" data-tip="PostNord skickar aldrig SMS fr&aring;n privata nummer">+46 73 XXX XX XX</span></div></div><div class="sim-email-body"><p>PostNord: Ditt paket v&auml;ntar. Betala <span class="hl" data-tip="PostNord tar aldrig betalt via SMS">29 kr i tull</span>: <span class="hl" data-tip="F&ouml;rkortad l&auml;nk d&ouml;ljer destination">bit.ly/postnord-2026</span></p></div></div><div class="sim-warns"><div class="sim-warn"><span>&#128308;</span><p>PostNord skickar aldrig SMS fr&aring;n privata nummer. Kontrollera p&aring; postnord.se.</p></div><div class="sim-warn"><span>&#128308;</span><p>F&ouml;rkortade URL:er d&ouml;ljer den verkliga destinationen.</p></div></div>',
+  vd:'<div class="sim-email"><div class="sim-email-hdr"><div class="sim-field"><strong>Fr&aring;n:</strong> <span class="hl" data-tip="Liknar men &auml;r inte VD:ns riktiga adress">erik.lindgren@foretag-ab.com</span></div><div class="sim-field"><strong>&Auml;mne:</strong> <span class="hl" data-tip="Skapar br&aring;dska">Br&aring;dskande &ndash; Konfidentiell &ouml;verf&ouml;ring</span></div></div><div class="sim-email-body"><p>Genomf&ouml;r <span class="hl" data-tip="Kringg&aring;r rutiner">omedelbart &ouml;verf&ouml;ring p&aring; 485 000 kr</span> till: <span class="hl" data-tip="Ok&auml;nt konto">SE45 5000 0000 0583 9825 7466</span></p></div></div><div class="sim-warns"><div class="sim-warn"><span>&#128308;</span><p><strong>VD-bedr&auml;geri:</strong> Verifiera ALLTID stora &ouml;verf&ouml;ringar via telefon till ett k&auml;nt nummer.</p></div></div>',
+  qr:'<div class="sim-email"><div class="sim-email-hdr"><div class="sim-field"><strong>Typ:</strong> QR-Phishing (Quishing)</div></div><div class="sim-email-body"><p style="text-align:center;font-size:3rem;">&#128247;</p><p style="text-align:center;font-weight:700;">Skanna QR-koden f&ouml;r att betala parkering</p><br><p>Leder till: <span class="hl" data-tip="Falsk betalningssida">www.parkering-betalning.net/pay</span></p></div></div><div class="sim-warns"><div class="sim-warn"><span>&#128308;</span><p>Kontrollera alltid URL:en efter att du skannat en QR-kod.</p></div></div>',
+  ransomware:'<div class="sim-email" style="background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.2)"><div class="sim-email-hdr" style="background:rgba(239,68,68,0.1)"><span style="color:#fca5a5;font-weight:700">SIMULERAT RANSOMWARE (S&auml;ker sandl&aring;da)</span></div><div class="sim-email-body"><p style="color:#ef4444;font-weight:700">DINA FILER HAR KRYPTERATS</p><br><p>Betala 0.05 Bitcoin inom 72 timmar.</p><br><p style="color:#fca5a5;font-weight:600">RATT: Betala INTE &ndash; koppla bort och kontakta IT.</p></div></div><div class="sim-warns"><div class="sim-warn"><span>&#128308;</span><p>Koppla OMEDELBART bort fr&aring;n n&auml;tverket.</p></div><div class="sim-warn"><span>&#128308;</span><p>Betala ALDRIG l&ouml;sensumman.</p></div></div>'
+};
+function switchSim(type,btn){
+  document.querySelectorAll('.sim-tab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('sim-content').innerHTML=simData[type];
+}
+
+// QUIZ - 50 questions
+var QS=[
+  {q:"1/50: Vad st&aring;r CIA-triaden f&ouml;r?",a:["En organisation","Konfidentialitet, Integritet och Tillg&auml;nglighet","En krypteringsalgoritm","Central Intelligence Agency"],c:1,ok:"Ratt! CIA-triaden: Konfidentialitet, Integritet och Tillg&auml;nglighet.",bad:"Fel. CIA-triaden: Konfidentialitet (C), Integritet (I) och Tillg&auml;nglighet (A)."},
+  {q:"2/50: Skillnaden mellan virus och mask?",a:["Ingen skillnad","Virus beh&ouml;ver v&auml;rdfil, mask sprider sig sj&auml;lvst&auml;ndigt","Mask &auml;r alltid farligare","Virus via internet"],c:1,ok:"Ratt! Virus beh&ouml;ver v&auml;rdfil, maskar sprider sig sj&auml;lvst&auml;ndigt.",bad:"Fel. Virus beh&ouml;ver v&auml;rdfil, maskar sprider sig sj&auml;lvst&auml;ndigt."},
+  {q:"3/50: Vad &auml;r ransomware?",a:["Antivirusprogram","Skadlig kod som krypterar filer och kr&auml;ver l&ouml;sensumma","En brandv&auml;gg","S&auml;kert fildelningss&auml;tt"],c:1,ok:"Ratt! Ransomware krypterar filer och kr&auml;ver betalning.",bad:"Fel. Ransomware krypterar filer och kr&auml;ver l&ouml;sensumma."},
+  {q:"4/50: Vad inneb&auml;r 3-2-1-principen?",a:["3 l&ouml;senord, 2 enheter, 1 anv&auml;ndare","3 kopior, 2 lagringsmedier, 1 offline","3 backuper/dag","3 anv&auml;ndare, 2 admins"],c:1,ok:"Ratt! 3-2-1: 3 kopior, 2 lagringsmedier, 1 offline.",bad:"Fel. 3-2-1: 3 kopior, 2 lagringsmedier, 1 kopia offline."},
+  {q:"5/50: Vad &auml;r phishing?",a:["Fiska digitalt","Lura anv&auml;ndare att avsl&ouml;ja k&auml;nslig information","En brandv&auml;gg","S&auml;ker kommunikation"],c:1,ok:"Ratt! Phishing lurar anv&auml;ndare att avsl&ouml;ja l&ouml;senord eller kortuppgifter.",bad:"Fel. Phishing lurar anv&auml;ndare att avsl&ouml;ja k&auml;nslig information."},
+  {q:"6/50: Vad &auml;r ett VD-bedr&auml;geri?",a:["VD beg&aring;r brott","Angriparen utger sig f&ouml;r VD och lurer anst&auml;llda att betala","VD gl&ouml;mmer l&ouml;senord","Ransomware-typ"],c:1,ok:"Ratt! VD-bedr&auml;geri: angriparen utger sig f&ouml;r VD och stressar till betalning.",bad:"Fel. VD-bedr&auml;geri: angriparen utger sig f&ouml;r VD och lurer anst&auml;llda att betala."},
+  {q:"7/50: Vad &auml;r spyware?",a:["Sp&aring;rar webbplatser","Samlar in k&auml;nslig information om anv&auml;ndaren","En brandv&auml;gg","S&auml;ker kommunikation"],c:1,ok:"Ratt! Spyware samlar in l&ouml;senord och bankuppgifter.",bad:"Fel. Spyware &ouml;vervakar anv&auml;ndaren och samlar in k&auml;nslig information."},
+  {q:"8/50: Vad &auml;r en Zero-Day-s&aring;rbarhet?",a:["Uppt&auml;ckt idag","Ok&auml;nd s&auml;kerhetsbrist som &auml;nnu inte &aring;tg&auml;rdats","Bara p&aring; nya datorer","L&ouml;senordsattack"],c:1,ok:"Ratt! Zero-Day &auml;r ok&auml;nd och &auml;nnu inte &aring;tg&auml;rdad.",bad:"Fel. Zero-Day &auml;r en ok&auml;nd s&auml;kerhetsbrist som &auml;nnu inte &aring;tg&auml;rdats."},
+  {q:"9/50: Vad &auml;r en DDoS-attack?",a:["Stj&auml;l l&ouml;senord","&Ouml;verbelastar tj&auml;nst med trafik","Krypterar filer","Phishing-typ"],c:1,ok:"Ratt! DDoS &ouml;verbelastar en tj&auml;nst med trafik.",bad:"Fel. DDoS skickar stora m&auml;ngder trafik f&ouml;r att g&ouml;ra en tj&auml;nst otillg&auml;nglig."},
+  {q:"10/50: Vad &auml;r en MitM-attack?",a:["Man st&aring;r mitt i rum","Angriparen avlyssnar kommunikationen","Ransomware-typ","Tv&aring; hackare samarbetar"],c:1,ok:"Ratt! MitM: angriparen avlyssnar kommunikationen.",bad:"Fel. MitM inneb&auml;r att angriparen avlyssnar kommunikationen."},
+  {q:"11/50: Varningssignal f&ouml;r phishing?",a:["Perfekt svenska","Stress, tidspress och beg&auml;ran om l&ouml;senord","K&auml;nd avs&auml;ndare","Inga bilagor"],c:1,ok:"Ratt! Stress, tidspress och beg&auml;ran om l&ouml;senord &auml;r varningssignaler.",bad:"Fel. Stress, tidspress och beg&auml;ran om l&ouml;senord &auml;r varningssignaler."},
+  {q:"12/50: Vad &auml;r QR-phishing?",a:["Phishing med QR-bilaga","QR-kod leder till falsk webbplats","S&auml;ker delning","Telefonphishing"],c:1,ok:"Ratt! Quishing: QR-kod leder till falsk webbplats.",bad:"Fel. QR-phishing: QR-kod leder till falsk webbplats."},
+  {q:"13/50: Vad &auml;r vishing?",a:["E-postphishing","Phishing via r&ouml;stsamtal","SMS-phishing","Sociala medier"],c:1,ok:"Ratt! Vishing &auml;r phishing via r&ouml;stsamtal.",bad:"Fel. Vishing &auml;r phishing via r&ouml;stsamtal."},
+  {q:"14/50: Vad inneb&auml;r konfidentialitet?",a:["Information &auml;r korrekt","Information &auml;r bara tillg&auml;nglig f&ouml;r beh&ouml;riga","System &auml;r tillg&auml;ngliga","Information &auml;r krypterad"],c:1,ok:"Ratt! Konfidentialitet: information &auml;r bara tillg&auml;nglig f&ouml;r beh&ouml;riga.",bad:"Fel. Konfidentialitet: information &auml;r bara tillg&auml;nglig f&ouml;r beh&ouml;riga."},
+  {q:"15/50: Vad inneb&auml;r integritet?",a:["&Auml;rliga anst&auml;llda","Information &auml;r korrekt och skyddad mot manipulation","System &auml;r tillg&auml;ngliga","Information &auml;r krypterad"],c:1,ok:"Ratt! Integritet: information &auml;r korrekt och skyddad.",bad:"Fel. Integritet: information &auml;r korrekt och skyddad mot manipulation."},
+  {q:"16/50: Vad inneb&auml;r tillg&auml;nglighet?",a:["Alla kan komma &aring;t allt","System och information &auml;r tillg&auml;ngliga n&auml;r de beh&ouml;vs","Information &auml;r krypterad","Inloggning fr&aring;n var som helst"],c:1,ok:"Ratt! Tillg&auml;nglighet: system &auml;r tillg&auml;ngliga n&auml;r de beh&ouml;vs.",bad:"Fel. Tillg&auml;nglighet: system och information &auml;r tillg&auml;ngliga n&auml;r de beh&ouml;vs."},
+  {q:"17/50: Vad &auml;r en trojan?",a:["Gammal dator","Programvara som utger sig f&ouml;r legitim men inneh&aring;ller skadlig kod","Brandv&auml;gg","Krypteringsmetod"],c:1,ok:"Ratt! Trojaner utger sig f&ouml;r legitima men inneh&aring;ller skadlig kod.",bad:"Fel. En trojan utger sig f&ouml;r legitim programvara men inneh&aring;ller skadlig kod."},
+  {q:"18/50: Vad &auml;r ett insiderhot?",a:["Hot fr&aring;n utl&auml;ndska hackare","Incidenter orsakade av personer inom organisationen","Hot mot interna n&auml;tverk","Malware-typ"],c:1,ok:"Ratt! Insiderhot: incidenter orsakade av interna personer.",bad:"Fel. Insiderhot &auml;r incidenter orsakade av personer inom organisationen."},
+  {q:"19/50: Vad g&ouml;r du med misst&auml;nkt mejl?",a:["&Ouml;ppnar och kontrollerar","Raderar utan att &ouml;ppna bilagor och rapporterar till IT","Vidarebefordrar","Svarar och fr&aring;gar"],c:1,ok:"Ratt! Radera utan att &ouml;ppna bilagor och rapportera till IT.",bad:"Fel. Radera misst&auml;nkta mejl utan att &ouml;ppna bilagor och rapportera."},
+  {q:"20/50: Vad &auml;r MFA?",a:["Flera l&ouml;senord","Verifiering med tv&aring;+ faktorer","Logga in fr&aring;n flera enheter","Krypteringstyp"],c:1,ok:"Ratt! MFA kr&auml;ver tv&aring; eller fler faktorer f&ouml;r inloggning.",bad:"Fel. MFA &auml;r en verifieringsmetod som kr&auml;ver tv&aring; eller fler faktorer."},
+  {q:"21/50: Varf&ouml;r &auml;r uppdateringar viktiga?",a:["G&ouml;r program snabbare","&Aring;tg&auml;rdar k&auml;nda s&auml;kerhetsbrister","Obligatoriska","F&ouml;rb&auml;ttrar gr&auml;nssnittet"],c:1,ok:"Ratt! Uppdateringar &aring;tg&auml;rdar k&auml;nda s&auml;kerhetsbrister.",bad:"Fel. Uppdateringar &auml;r viktiga f&ouml;r att &aring;tg&auml;rda k&auml;nda s&auml;kerhetsbrister."},
+  {q:"22/50: Vad &auml;r leverant&ouml;rsbedr&auml;geri?",a:["Fel varor","Bedragaren utger sig f&ouml;r leverant&ouml;r och &auml;ndrar bankkontouppgifter","H&ouml;jt pris","Ransomware"],c:1,ok:"Ratt! Bedragaren utger sig f&ouml;r leverant&ouml;r och &auml;ndrar bankkontouppgifter.",bad:"Fel. Leverant&ouml;rsbedr&auml;geri: bedragaren &auml;ndrar bankkontouppgifter."},
+  {q:"23/50: Vad &auml;r n&auml;tverkssegmentering?",a:["Dela upp internet","Dela upp n&auml;tverket i isolerade zoner","Blockera all trafik","Kryptera trafik"],c:1,ok:"Ratt! Segmentering delar upp n&auml;tverket i isolerade zoner.",bad:"Fel. N&auml;tverkssegmentering delar upp n&auml;tverket i isolerade zoner."},
+  {q:"24/50: Konfidentialitets&aring;tg&auml;rd?",a:["S&auml;kerhetskopior","Kryptering och beh&ouml;righetsstyrning","Redundanta system","Digitala signaturer"],c:1,ok:"Ratt! Kryptering och beh&ouml;righetsstyrning s&auml;kerst&auml;ller konfidentialitet.",bad:"Fel. Kryptering och beh&ouml;righetsstyrning &auml;r konfidentialitets&aring;tg&auml;rder."},
+  {q:"25/50: Integritets&aring;tg&auml;rd?",a:["Kryptering","Digitala signaturer och loggning","Redundanta system","MFA"],c:1,ok:"Ratt! Digitala signaturer och loggning s&auml;kerst&auml;ller integritet.",bad:"Fel. Digitala signaturer och loggning &auml;r integritets&aring;tg&auml;rder."},
+  {q:"26/50: Tillg&auml;nglighets&aring;tg&auml;rd?",a:["Kryptering","Beh&ouml;righetsstyrning","S&auml;kerhetskopior och redundanta system","Digitala signaturer"],c:2,ok:"Ratt! S&auml;kerhetskopior och redundanta system s&auml;kerst&auml;ller tillg&auml;nglighet.",bad:"Fel. S&auml;kerhetskopior och redundanta system &auml;r tillg&auml;nglighets&aring;tg&auml;rder."},
+  {q:"27/50: Hur sprids ett virus?",a:["Sj&auml;lvst&auml;ndigt","Via v&auml;rdfil n&auml;r anv&auml;ndaren &ouml;ppnar infekterad fil","Via e-post automatiskt","Via Bluetooth"],c:1,ok:"Ratt! Virus aktiveras n&auml;r anv&auml;ndaren &ouml;ppnar den infekterade filen.",bad:"Fel. Virus sprids via v&auml;rdfil och aktiveras n&auml;r anv&auml;ndaren &ouml;ppnar den."},
+  {q:"28/50: Avsiktligt insiderhot?",a:["Klick p&aring; skadlig l&auml;nk","Anst&auml;lld stj&auml;l information eller saboterar","Gl&ouml;mt l&ouml;senord","Svagt l&ouml;senord"],c:1,ok:"Ratt! Avsiktliga insiderhot: informationsstj&auml;ld, sabotage.",bad:"Fel. Avsiktliga insiderhot: anst&auml;lld stj&auml;l eller saboterar medvetet."},
+  {q:"29/50: Oavsiktligt insiderhot?",a:["Avsiktlig l&auml;cka","Klick p&aring; skadlig l&auml;nk eller fel skickat dokument","Sabotage","Datastj&auml;ld"],c:1,ok:"Ratt! Oavsiktliga insiderhot: klick p&aring; skadliga l&auml;nkar, felskickade dokument.",bad:"Fel. Oavsiktliga insiderhot uppst&aring;r n&auml;r anst&auml;llda av misstag skadar s&auml;kerheten."},
+  {q:"30/50: Fysiskt s&auml;kerhetshot?",a:["DDoS","St&ouml;ld av datorer eller mobiltelefoner","Phishing","Ransomware"],c:1,ok:"Ratt! Fysiska hot: st&ouml;ld av enheter, obeh&ouml;rig &aring;tkomst.",bad:"Fel. Fysiska hot inkluderar st&ouml;ld av datorer och obeh&ouml;rig &aring;tkomst."},
+  {q:"31/50: Vad g&ouml;r du vid ransomware?",a:["Betalar","Kopplar bort fr&aring;n n&auml;tverket och kontaktar IT","Startar om","Installerar antivirus"],c:1,ok:"Ratt! Koppla bort fr&aring;n n&auml;tverket och kontakta IT. Betala aldrig!",bad:"Fel. Koppla bort fr&aring;n n&auml;tverket och kontakta IT. Betala aldrig."},
+  {q:"32/50: Syftet med cybers&auml;kerhet?",a:["G&ouml;ra internet snabbare","Skydda information och s&auml;kerst&auml;lla kontinuitet","&Ouml;vervaka anst&auml;llda","Spara pengar"],c:1,ok:"Ratt! Cybers&auml;kerhet skyddar information och s&auml;kerst&auml;ller kontinuitet.",bad:"Fel. Cybers&auml;kerhet skyddar information och s&auml;kerst&auml;ller verksamhetens kontinuitet."},
+  {q:"33/50: Skillnad IT-s&auml;kerhet vs cybers&auml;kerhet?",a:["Ingen","IT-s&auml;kerhet &auml;r bredare, cybers&auml;kerhet fokuserar p&aring; digitala hot","Cybers&auml;kerhet &auml;r bredare","Bara l&ouml;senord"],c:1,ok:"Ratt! IT-s&auml;kerhet &auml;r bredare, cybers&auml;kerhet fokuserar p&aring; digitala hot.",bad:"Fel. IT-s&auml;kerhet &auml;r bredare, cybers&auml;kerhet fokuserar p&aring; digitala hot via n&auml;tverk."},
+  {q:"34/50: Hur sprids ransomware?",a:["Via Bluetooth","Via phishing-mejl med skadliga bilagor","Via telefon","Via sociala medier"],c:1,ok:"Ratt! De flesta ransomware-attacker b&ouml;rjar med phishing-mejl.",bad:"Fel. Ransomware sprids ofta via phishing-mejl med skadliga bilagor."},
+  {q:"35/50: Syftet med segmentering vid ransomware?",a:["Snabbare n&auml;tverk","Begr&auml;nsar skadan om en dator infekteras","Blockerar trafik","Krypterar data"],c:1,ok:"Ratt! Segmentering begr&auml;nsar spridningen av ransomware.",bad:"Fel. Segmentering begr&auml;nsar skadan om en dator infekteras."},
+  {q:"36/50: Vad &auml;r EDR?",a:["Brandv&auml;gg","L&ouml;sning f&ouml;r att uppt&auml;cka och stoppa hot p&aring; slutpunkter","S&auml;kerhetskopieringsl&ouml;sning","Krypteringsmetod"],c:1,ok:"Ratt! EDR uppt&auml;cker och stoppar hot p&aring; slutpunkter.",bad:"Fel. EDR (Endpoint Detection and Response) uppt&auml;cker och stoppar hot p&aring; slutpunkter."},
+  {q:"37/50: Varf&ouml;r begr&auml;nsa beh&ouml;righeter?",a:["Sv&aring;rare f&ouml;r anst&auml;llda","Minskar risken att skadeprogram f&aring;r tillg&aring;ng till hela n&auml;tverket","Sparar pengar","F&ouml;rb&auml;ttrar prestanda"],c:1,ok:"Ratt! Begr&auml;nsade beh&ouml;righeter minskar skadan om ett konto komprometteras.",bad:"Fel. Begr&auml;nsade beh&ouml;righeter minskar risken att skadeprogram f&aring;r tillg&aring;ng till hela n&auml;tverket."},
+  {q:"38/50: Vad &auml;r kritisk infrastruktur?",a:["Viktiga byggnader","Samh&auml;llsviktiga system som energi, transport och sjukv&aring;rd","Statliga myndigheter","Stora f&ouml;retag"],c:1,ok:"Ratt! Kritisk infrastruktur: energi, transport, telekommunikation, sjukv&aring;rd.",bad:"Fel. Kritisk infrastruktur inkluderar energi, transport, telekommunikation och sjukv&aring;rd."},
+  {q:"39/50: Vad &auml;r cyberkrigf&ouml;ring?",a:["Datorspel","Statssponsrade attacker mot andra l&auml;nders infrastruktur","Ransomware","Privatpersonsattacker"],c:1,ok:"Ratt! Cyberkrigf&ouml;ring: statssponsrade attacker mot infrastruktur.",bad:"Fel. Cyberkrigf&ouml;ring: statssponsrade attacker mot andra l&auml;nders infrastruktur."},
+  {q:"40/50: Vad &auml;r social ingenj&ouml;rskonst?",a:["Bygga n&auml;tverk","Manipulera m&auml;nniskor psykologiskt f&ouml;r att f&aring; information","Programmera sociala medier","Utbilda anst&auml;llda"],c:1,ok:"Ratt! Social ingenj&ouml;rskonst utnyttjar f&ouml;rtroende och stress.",bad:"Fel. Social ingenj&ouml;rskonst manipulerar m&auml;nniskor psykologiskt."},
+  {q:"41/50: SMS om paketavgift?",a:["Betalar via l&auml;nken","G&aring;r direkt till officiell webbplats","Ringer numret i SMS","Ignorerar"],c:1,ok:"Ratt! G&aring; alltid direkt till officiell webbplats.",bad:"Fel. G&aring; alltid direkt till leverant&ouml;rens officiella webbplats."},
+  {q:"42/50: Vad &auml;r rekryteringsbedr&auml;geri?",a:["F&ouml;retag anst&auml;ller fel","Falska jobberbjudanden f&ouml;r att f&aring; personliga uppgifter","Rekryterare beg&auml;r l&ouml;n","Ransomware"],c:1,ok:"Ratt! Falska jobberbjudanden anv&auml;nds f&ouml;r att f&aring; personliga uppgifter.",bad:"Fel. Rekryteringsbedr&auml;gerier anv&auml;nder falska jobberbjudanden."},
+  {q:"43/50: Falsk m&ouml;tesinbjudan?",a:["Inbjudan till fel person","Phishing d&auml;r l&auml;nken stj&auml;l kontot","M&ouml;te utan agenda","Ransomware"],c:1,ok:"Ratt! Falska m&ouml;tesinbjudningar leder till falska inloggningssidor.",bad:"Fel. Falska m&ouml;tesinbjudningar &auml;r phishing d&auml;r kontot stj&auml;ls vid inloggning."},
+  {q:"44/50: Varf&ouml;r testa s&auml;kerhetskopior?",a:["Kontrollera utrymme","S&auml;kerst&auml;lla att de kan &aring;terst&auml;llas","Visa f&ouml;r chefen","Uppdatera inneh&aring;ll"],c:1,ok:"Ratt! En backup som inte kan &aring;terst&auml;llas &auml;r v&auml;rdel&ouml;s.",bad:"Fel. Testa s&auml;kerhetskopior f&ouml;r att s&auml;kerst&auml;lla att de kan &aring;terst&auml;llas."},
+  {q:"45/50: Phishing via sociala medier?",a:["Dela f&ouml;r mycket","Bedragare skickar meddelanden och utger sig f&ouml;r f&ouml;retag","Anv&auml;nda p&aring; jobbet","Ransomware"],c:1,ok:"Ratt! Bedragare skickar privata meddelanden via LinkedIn, Facebook etc.",bad:"Fel. Phishing via sociala medier: bedragare skickar meddelanden och utger sig f&ouml;r f&ouml;retag."},
+  {q:"46/50: Vad &auml;r informationsp&aring;verkan?",a:["Informera anst&auml;llda","Statssponsrade f&ouml;rs&ouml;k att sprida falsk information","Malware","P&aring;verka rutiner"],c:1,ok:"Ratt! Informationsp&aring;verkan: statssponsrade f&ouml;rs&ouml;k att sprida falsk information.",bad:"Fel. Informationsp&aring;verkan: statssponsrade f&ouml;rs&ouml;k att p&aring;verka opinion."},
+  {q:"47/50: Exploatering av s&aring;rbarheter?",a:["Kreativ anv&auml;ndning","Hackare utnyttjar s&auml;kerhetsbrister f&ouml;r &aring;tkomst","Testa s&auml;kerhet","Uppdatera program"],c:1,ok:"Ratt! Exploatering: hackare utnyttjar s&auml;kerhetsbrister f&ouml;r obeh&ouml;rig &aring;tkomst.",bad:"Fel. Exploatering: hackare utnyttjar s&auml;kerhetsbrister f&ouml;r att f&aring; &aring;tkomst."},
+  {q:"48/50: Syftet med s&auml;kerhetsutbildning?",a:["Lagkrav","G&ouml;ra anst&auml;llda medvetna om hot","Spara pengar","&Ouml;vervaka"],c:1,ok:"Ratt! Utbildning g&ouml;r anst&auml;llda medvetna om hot. M&auml;nniskan &auml;r f&ouml;rsta f&ouml;rsvarslinje.",bad:"Fel. Utbildning g&ouml;r anst&auml;llda medvetna om hot och ger dem verktyg."},
+  {q:"49/50: Hur skyddar cybers&auml;kerhet ekonomin?",a:["G&ouml;r f&ouml;retag l&ouml;nsamma","Hj&auml;lper undvika produktionsstopp och f&ouml;rluster","Minskar skatter","&Ouml;kar f&ouml;rs&auml;ljning"],c:1,ok:"Ratt! Cybers&auml;kerhet hj&auml;lper undvika produktionsstopp och ekonomiska f&ouml;rluster.",bad:"Fel. Cybers&auml;kerhet hj&auml;lper undvika produktionsstopp och ekonomiska f&ouml;rluster."},
+  {q:"50/50: Viktigaste slutsatsen?",a:["Teknik &auml;r allt","B&aring;de teknik och medvetna anv&auml;ndare kr&auml;vs","Bara f&ouml;r stora f&ouml;retag","Om&ouml;jligt att skydda sig"],c:1,ok:"Fantastiskt! Alla 50 fr&aring;gor klara! B&aring;de teknik och medvetna anv&auml;ndare kr&auml;vs.",bad:"Fel. B&aring;de tekniska &aring;tg&auml;rder och s&auml;kerhetsmedvetna anv&auml;ndare kr&auml;vs."}
+];
+var curQ=0,qAns=false;
+function doQ(btn,correct){
+  if(qAns)return;
+  qAns=true;
+  var opts=document.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){o.style.pointerEvents='none';});
+  opts[QS[curQ].c].classList.add('correct');
+  if(!correct)btn.classList.add('wrong');
+  var fb=document.getElementById('qfb');
+  fb.textContent=correct?QS[curQ].ok:QS[curQ].bad;
+  fb.className='quiz-fb show '+(correct?'ok':'bad');
+  if(curQ<49)document.getElementById('qnext').style.display='inline-block';
+}
+function nextQ(){
+  curQ++;qAns=false;
+  var q=QS[curQ];
+  document.getElementById('qq').textContent=q.q;
+  document.getElementById('qprog').style.width=((curQ+1)/50*100)+'%';
+  document.getElementById('qctr').textContent='Fr&aring;ga '+(curQ+1)+' av 50';
+  document.getElementById('qnext').style.display='none';
+  var fb=document.getElementById('qfb');fb.className='quiz-fb';fb.textContent='';
+  var d=document.getElementById('qopts');
+  d.innerHTML=q.a.map(function(o,i){
+    return '<button class="quiz-opt" onclick="doQ(this,'+(i===q.c)+')">'+o+'</button>';
+  }).join('');
+}
+
+// LESSON SYSTEM
+var _cid=null,_sidx=0,_done={};
+
+function buildSection(items){
+  var html='';
+  items.forEach(function(item){
+    if(item.type==='intro'){
+      html+='<p style="color:var(--muted);font-size:0.97rem;line-height:1.9;margin-bottom:1.2rem;">'+item.text+'</p>';
+    }else if(item.type==='p'){
+      html+='<p style="color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:0.9rem;">'+item.text+'</p>';
+    }else if(item.type==='h3'){
+      html+='<h3 class="lc-h3">'+item.text+'</h3>';
+    }else if(item.type==='list'){
+      html+='<ul class="lc-section" style="margin-bottom:1rem;">';
+      item.items.forEach(function(li){html+='<li>'+li+'</li>';});
+      html+='</ul>';
+    }else if(item.type==='callout-blue'){
+      html+='<div class="lc-callout lc-callout-blue"><h4>&#128161; '+item.title+'</h4><p>'+item.text+'</p></div>';
+    }else if(item.type==='callout-red'){
+      html+='<div class="lc-callout lc-callout-red"><h4>&#9888;&#65039; '+item.title+'</h4><p>'+item.text+'</p></div>';
+    }else if(item.type==='callout-green'){
+      html+='<div class="lc-callout lc-callout-green"><h4>&#9989; '+item.title+'</h4><p>'+item.text+'</p></div>';
+    }else if(item.type==='callout-warn'){
+      html+='<div class="lc-callout lc-callout-warn"><h4>&#128161; '+item.title+'</h4><p>'+item.text+'</p></div>';
+    }else if(item.type==='table'){
+      html+='<table class="lc-table"><thead><tr>';
+      item.headers.forEach(function(h){html+='<th>'+h+'</th>';});
+      html+='</tr></thead><tbody>';
+      item.rows.forEach(function(row){
+        html+='<tr>';
+        row.forEach(function(cell){html+='<td>'+cell+'</td>';});
+        html+='</tr>';
+      });
+      html+='</tbody></table>';
+    }else if(item.type==='quiz'){
+      var qid='lq'+Math.random().toString(36).substr(2,6);
+      html+='<div class="lc-quiz"><div class="lc-quiz-title">&#129504; Kunskapskontroll</div>';
+      html+='<div class="lc-quiz-q">'+item.q+'</div>';
+      html+='<div class="lc-quiz-opts" id="'+qid+'">';
+      item.opts.forEach(function(o,i){
+        var esc=o.replace(/'/g,"&#39;");
+        var okE=item.ok.replace(/'/g,"&#39;");
+        var badE=item.bad.replace(/'/g,"&#39;");
+        html+='<button class="lc-quiz-opt" onclick="doLQ(this,'+(i===item.c)+',' +
+          JSON.stringify(qid)+','+JSON.stringify(item.ok)+','+JSON.stringify(item.bad)+','+item.c+')">'+o+'</button>';
+      });
+      html+='</div><div class="lc-quiz-fb" id="fb-'+qid+'"></div></div>';
+    }
+  });
+  return html;
+}
+
+function doLQ(btn,ok,qid,okMsg,badMsg,ci){
+  var container=document.getElementById(qid);
+  if(!container)return;
+  var opts=container.querySelectorAll('.lc-quiz-opt');
+  opts.forEach(function(o){o.style.pointerEvents='none';});
+  if(opts[ci])opts[ci].classList.add('ok');
+  if(!ok)btn.classList.add('bad');
+  var fb=document.getElementById('fb-'+qid);
+  if(fb){fb.textContent=ok?okMsg:badMsg;fb.className='lc-quiz-fb show '+(ok?'ok':'bad');}
+}
+
+// LESSON DATA
+var LESSONS={};
+
+LESSONS.intro={
+  title:'Introduktion till IT-s&auml;kerhet &amp; Cybers&auml;kerhet',
+  sections:[
+    {title:'Vad &auml;r IT-s&auml;kerhet?',content:function(){return buildSection([
+      {type:'intro',text:'I dagens digitala samh&auml;lle &auml;r information en av v&aring;ra mest v&auml;rdefulla tillg&aring;ngar. Privatpersoner, f&ouml;retag och myndigheter anv&auml;nder dagligen datorer, mobiltelefoner, molntj&auml;nster och internet f&ouml;r att kommunicera, lagra information och driva verksamheter. Samtidigt &ouml;kar antalet cyberhot och s&auml;kerhetsincidenter, vilket g&ouml;r IT-s&auml;kerhet till en avg&ouml;rande del av b&aring;de vardagslivet och arbetslivet.'},
+      {type:'p',text:'IT-s&auml;kerhet handlar om att skydda information, system, n&auml;tverk och digitala resurser mot obeh&ouml;rig &aring;tkomst, manipulation, f&ouml;rlust eller st&ouml;rningar. Det &auml;r ett brett omr&aring;de som omfattar alla tekniska, administrativa och organisatoriska &aring;tg&auml;rder som anv&auml;nds f&ouml;r att skydda information och IT-system. Cybers&auml;kerhet &auml;r en del av IT-s&auml;kerheten och fokuserar s&auml;rskilt p&aring; att skydda digitala milj&ouml;er fr&aring;n attacker som sker via internet och andra kommunikationsn&auml;tverk.'},
+      {type:'p',text:'Konsekvenserna av bristande IT-s&auml;kerhet kan vara f&ouml;r&ouml;dande. F&ouml;r privatpersoner kan det inneb&auml;ra identitetsst&ouml;ld, ekonomiska f&ouml;rluster och integritetskr&auml;nkningar. F&ouml;r f&ouml;retag kan det leda till produktionsstopp, f&ouml;rlust av aff&auml;rshemligheter, skadat anseende och kostsamma b&ouml;ter. F&ouml;r samh&auml;llet i stort kan cyberattacker mot kritisk infrastruktur &ndash; som energif&ouml;rs&ouml;rjning, sjukv&aring;rd och transportsystem &ndash; f&aring; allvarliga konsekvenser f&ouml;r m&aring;nga m&auml;nniskor.'},
+      {type:'p',text:'Digitaliseringen har skapat enorma m&ouml;jligheter men ocks&aring; nya s&aring;rbarheter. N&auml;r allt fler enheter kopplas upp mot internet &ndash; fr&aring;n datorer och mobiltelefoner till industriella styrsystem och medicinska enheter &ndash; &ouml;kar angreppsytan f&ouml;r cyberkriminella. Varje uppkopplad enhet &auml;r en potentiell ing&aring;ngspunkt f&ouml;r en attack. Cyberkriminella &auml;r idag v&auml;lorganiserade, professionella och motiverade av ekonomisk vinning, politiska m&aring;l eller ren sabotage.'},
+      {type:'h3',text:'Syftet med IT-s&auml;kerhet och cybers&auml;kerhet'},
+      {type:'list',items:['Skydda k&auml;nslig information fr&aring;n obeh&ouml;rig &aring;tkomst','F&ouml;rhindra dataintr&aring;ng och cyberattacker','S&auml;kerst&auml;lla att information &auml;r korrekt och tillg&auml;nglig','Skydda verksamheters ekonomi och rykte','Skapa en trygg digital milj&ouml; f&ouml;r anv&auml;ndare','Uppfylla lagkrav och regulatoriska krav (t.ex. GDPR)']},
+      {type:'callout-blue',title:'Viktigt att f&ouml;rst&aring;',text:'IT-s&auml;kerhet &auml;r inte bara en teknisk fr&aring;ga &ndash; det &auml;r en organisatorisk och m&auml;nsklig fr&aring;ga. Tekniska l&ouml;sningar kan aldrig kompensera f&ouml;r bristande medvetenhet och d&aring;liga vanor hos anv&auml;ndarna. Den m&auml;nskliga faktorn &auml;r involverad i &ouml;ver 90% av alla s&auml;kerhetsincidenter.'},
+      {type:'quiz',q:'Vad &auml;r den viktigaste skillnaden mellan IT-s&auml;kerhet och cybers&auml;kerhet?',opts:['De &auml;r exakt samma sak','IT-s&auml;kerhet &auml;r bredare och inkluderar alla &aring;tg&auml;rder, cybers&auml;kerhet fokuserar p&aring; digitala hot via n&auml;tverk','Cybers&auml;kerhet &auml;r bredare &auml;n IT-s&auml;kerhet','IT-s&auml;kerhet handlar bara om l&ouml;senord'],c:1,ok:'Korrekt! IT-s&auml;kerhet &auml;r det bredare begreppet som inkluderar alla tekniska, administrativa och organisatoriska &aring;tg&auml;rder. Cybers&auml;kerhet &auml;r en del av IT-s&auml;kerheten och fokuserar p&aring; hot via internet och n&auml;tverk.',bad:'IT-s&auml;kerhet &auml;r det bredare begreppet som inkluderar alla &aring;tg&auml;rder f&ouml;r att skydda information och system. Cybers&auml;kerhet &auml;r en del av IT-s&auml;kerheten och fokuserar specifikt p&aring; digitala hot via n&auml;tverk.'}
+    ]);}},
+    {title:'CIA-triaden &ndash; Grunden f&ouml;r informationss&auml;kerhet',content:function(){return buildSection([
+      {type:'intro',text:'Informationss&auml;kerhet vilar p&aring; tre grundl&auml;ggande principer som tillsammans kallas CIA-triaden. Dessa tre principer &auml;r h&ouml;rnstenarna i allt s&auml;kerhetsarbete och anv&auml;nds f&ouml;r att bed&ouml;ma risker, utforma skydds&aring;tg&auml;rder och utv&auml;rdera s&auml;kerhetsniv&aring;n i en organisation. F&ouml;rkortningen CIA st&aring;r f&ouml;r Confidentiality (Konfidentialitet), Integrity (Integritet) och Availability (Tillg&auml;nglighet).'},
+      {type:'h3',text:'Konfidentialitet (Confidentiality)'},
+      {type:'p',text:'Konfidentialitet inneb&auml;r att information endast ska vara tillg&auml;nglig f&ouml;r de personer som har r&auml;tt att ta del av den. Det handlar om att skydda k&auml;nslig information fr&aring;n obeh&ouml;rig &aring;tkomst, oavsett om det r&ouml;r sig om personuppgifter, aff&auml;rshemligheter, finansiell information eller statliga hemligheter. Konfidentialitetsbrott kan leda till identitetsst&ouml;ld, ekonomiska f&ouml;rluster och allvarliga integritetskr&auml;nkningar.'},
+      {type:'p',text:'F&ouml;r att s&auml;kerst&auml;lla konfidentialitet anv&auml;nds tekniska &aring;tg&auml;rder som kryptering, beh&ouml;righetsstyrning och multifaktorautentisering (MFA). Kryptering omvandlar information till ett ol&auml;sbart format som bara kan &aring;terst&auml;llas med r&auml;tt nyckel. Beh&ouml;righetsstyrning s&auml;kerst&auml;ller att anv&auml;ndare bara har tillg&aring;ng till den information de beh&ouml;ver f&ouml;r sitt arbete &ndash; principen om minsta privilegium.'},
+      {type:'h3',text:'Integritet (Integrity)'},
+      {type:'p',text:'Integritet inneb&auml;r att information ska vara korrekt, fullst&auml;ndig och skyddad mot obeh&ouml;rig &auml;ndring eller manipulation. Det &auml;r avg&ouml;rande att man kan lita p&aring; att den information man arbetar med &auml;r korrekt och inte har manipulerats av obeh&ouml;riga. Integritetsbrott kan f&aring; allvarliga konsekvenser: om medicinsk information manipuleras kan det leda till felaktig behandling, om finansiell data &auml;ndras kan det orsaka stora ekonomiska f&ouml;rluster.'},
+      {type:'p',text:'F&ouml;r att skydda integriteten anv&auml;nds digitala signaturer, loggning av &auml;ndringar, kontrollsummor och versionshantering. Digitala signaturer g&ouml;r det m&ouml;jligt att verifiera att ett dokument eller meddelande inte har &auml;ndrats sedan det signerades. Loggning s&auml;kerst&auml;ller att alla &auml;ndringar i ett system registreras och kan sp&aring;ras.'},
+      {type:'h3',text:'Tillg&auml;nglighet (Availability)'},
+      {type:'p',text:'Tillg&auml;nglighet inneb&auml;r att system och information ska vara tillg&auml;ngliga f&ouml;r beh&ouml;riga anv&auml;ndare n&auml;r de beh&ouml;ver dem. Det r&auml;cker inte att information &auml;r konfidentiell och korrekt om den inte &auml;r tillg&auml;nglig n&auml;r den beh&ouml;vs. Tillg&auml;nglighetsbrott kan orsakas av tekniska fel, naturkatastrofer, str&ouml;mavbrott eller avsiktliga attacker som DDoS.'},
+      {type:'p',text:'F&ouml;r att s&auml;kerst&auml;lla tillg&auml;ngligheten anv&auml;nds s&auml;kerhetskopior, redundanta system, reservkraft och molnbaserade l&ouml;sningar. Regelb&uuml;ndna s&auml;kerhetskopior s&auml;kerst&auml;ller att data kan &aring;terst&auml;llas om det prim&auml;ra systemet g&aring;r ner. Redundanta system inneb&auml;r att det finns reservsystem som kan ta &ouml;ver om det prim&auml;ra systemet slutar fungera.'},
+      {type:'callout-green',title:'CIA-triaden i praktiken',text:'N&auml;r en s&auml;kerhetsincident intr&auml;ffar p&aring;verkar den vanligtvis en eller flera av CIA-triadens principer. Ett dataintr&aring;ng p&aring;verkar konfidentialiteten. Manipulation av data p&aring;verkar integriteten. En DDoS-attack p&aring;verkar tillg&auml;ngligheten. Genom att analysera incidenter utifr&aring;n CIA-triaden kan organisationer b&auml;ttre f&ouml;rst&aring; konsekvenserna och vidta r&auml;tt &aring;tg&auml;rder.'},
+      {type:'quiz',q:'En angripare lyckas &auml;ndra priser i ett f&ouml;retags databas utan att n&aring;gon m&auml;rker det. Vilken del av CIA-triaden har brutits?',opts:['Konfidentialitet &ndash; obeh&ouml;riga har f&aring;tt tillg&aring;ng till information','Integritet &ndash; information har manipulerats av obeh&ouml;riga','Tillg&auml;nglighet &ndash; systemet &auml;r inte tillg&auml;ngligt','Alla tre delar har brutits'],c:1,ok:'Korrekt! Integriteten har brutits eftersom information har &auml;ndrats av obeh&ouml;riga utan att det uppt&auml;ckts. Integritet handlar om att information ska vara korrekt och skyddad mot obeh&ouml;rig manipulation.',bad:'N&auml;r en angripare &auml;ndrar data i en databas &auml;r det integriteten som bryts &ndash; information har manipulerats av obeh&ouml;riga. Konfidentialitet handlar om tillg&aring;ng, tillg&auml;nglighet handlar om att system fungerar.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Hotbilden &ndash; Varf&ouml;r &auml;r cybers&auml;kerhet s&aring; viktigt idag?',content:function(){return buildSection([
+      {type:'intro',text:'Cyberhoten har f&ouml;r&auml;ndrats dramatiskt under de senaste &aring;ren. Fr&aring;n enkla virus som spreds via disketter p&aring; 1980-talet till dagens sofistikerade, statssponsrade cyberattacker och organiserade kriminella n&auml;tverk. F&ouml;r att kunna skydda sig effektivt m&aring;ste man f&ouml;rst&aring; hur hotbilden ser ut och varf&ouml;r cybers&auml;kerhet har blivit en strategisk fr&aring;ga f&ouml;r b&aring;de f&ouml;retag och nationer.'},
+      {type:'p',text:'Cyberkriminella &auml;r idag v&auml;lorganiserade och professionella. Det r&ouml;r sig ofta om organiserade kriminella n&auml;tverk med specialiserade roller: programmerare som utvecklar malware, rekryt&ouml;rer som v&auml;rvar insiders, penningtvättare som hanterar intäkterna, och operatörer som genomf&ouml;r attackerna. Vissa grupper &auml;r statssponsrade och arbetar p&aring; uppdrag av regeringar f&ouml;r att utf&ouml;ra spionage, sabotage eller informationsp&aring;verkan.'},
+      {type:'p',text:'Motivet bakom cyberattacker varierar. Ekonomisk vinning &auml;r det vanligaste motivet &ndash; cyberkriminella tj&auml;nar enorma summor p&aring; ransomware, bedr&auml;gerier och stj&auml;ld information. Andra motiv inkluderar politisk p&aring;verkan, spionage, sabotage av konkurrenter eller kritisk infrastruktur, och ibland ren vandalism eller aktivism (hacktivism). Oavsett motiv &auml;r konsekvenserna f&ouml;r offren ofta desamma: ekonomiska f&ouml;rluster, skadat anseende och f&ouml;rlorad data.'},
+      {type:'p',text:'Konsekvenserna av en lyckad cyberattack kan vara f&ouml;r&ouml;dande. F&ouml;r privatpersoner kan det inneb&auml;ra identitetsst&ouml;ld, t&ouml;mda bankkonton och &aring;rs av arbete med att &aring;terst&auml;lla sin kreditv&auml;rdighet. F&ouml;r f&ouml;retag kan en allvarlig cyberattack leda till produktionsstopp i veckor, f&ouml;rlust av k&auml;nslig kundinformation, b&ouml;ter f&ouml;r bristande dataskydd och permanent skadat anseende. Enligt IBM:s Cost of a Data Breach Report uppg&aring;r den genomsnittliga kostnaden f&ouml;r ett dataintr&aring;ng till &ouml;ver 4 miljoner dollar globalt.'},
+      {type:'callout-red',title:'Ingen &auml;r immun mot cyberattacker',text:'Sm&aring; f&ouml;retag, privatpersoner och stora organisationer &auml;r alla m&aring;l. Angripare anv&auml;nder automatiserade verktyg som skannar internet efter s&aring;rbara system dygnet runt. Det &auml;r inte en fr&aring;ga om du kommer att attackeras, utan n&auml;r. F&ouml;rberedelse och medvetenhet &auml;r avg&ouml;rande.'},
+      {type:'quiz',q:'Vad &auml;r det vanligaste motivet bakom cyberattacker?',opts:['Politisk p&aring;verkan','Ekonomisk vinning','Sabotage av konkurrenter','Ren nyfikenhet'],c:1,ok:'Korrekt! Ekonomisk vinning &auml;r det vanligaste motivet. Cyberkriminella tj&auml;nar enorma summor p&aring; ransomware, bedr&auml;gerier och stj&auml;ld information. Det &auml;r en m&aring;ngmiljardindustri som v&auml;xer &aring;r f&ouml;r &aring;r.',bad:'Ekonomisk vinning &auml;r faktiskt det vanligaste motivet bakom cyberattacker. Cyberkriminalitet &auml;r en m&aring;ngmiljardindustri d&auml;r kriminella tj&auml;nar enorma summor p&aring; ransomware, bedr&auml;gerier och stj&auml;ld information.'}
+    ]);}},
+  ]
+};
+LESSONS.malware={
+  title:'Malware &ndash; Skadlig programvara',
+  sections:[
+    {title:'Vad &auml;r malware och hur fungerar det?',content:function(){return buildSection([
+      {type:'intro',text:'Malware &auml;r ett samlingsnamn f&ouml;r programvara som medvetet har utvecklats f&ouml;r att skada, st&ouml;ra eller f&aring; obeh&ouml;rig &aring;tkomst till datorer, n&auml;tverk och data. Ordet malware kommer fr&aring;n engelskans "malicious software" &ndash; skadlig programvara. Det &auml;r ett av de st&ouml;rsta hoten mot digital s&auml;kerhet och drabbar b&aring;de privatpersoner, f&ouml;retag och myndigheter dagligen.'},
+      {type:'p',text:'Malware kan spridas p&aring; m&aring;nga olika s&auml;tt: via e-postbilagor, skadliga webbplatser, infekterade USB-minnen, piratkopierad programvara, s&aring;rbarheter i opatchade system och till och med via legitima programuppdateringar som har komprometterats av angripare. N&auml;r malware v&auml;l har installerats p&aring; ett system kan det utf&ouml;ra en m&auml;ngd skadliga handlingar beroende p&aring; vilken typ det r&ouml;r sig om.'},
+      {type:'h3',text:'Virus &ndash; Den klassiska formen av malware'},
+      {type:'p',text:'Ett datavirus fungerar p&aring; liknande s&auml;tt som ett biologiskt virus: det beh&ouml;ver en v&auml;rd f&ouml;r att kunna spridas. Ett datavirus f&auml;ster sig vid en legitim fil eller ett program och aktiveras n&auml;r anv&auml;ndaren &ouml;ppnar den infekterade filen. D&auml;refter kan viruset sprida sig till andra filer p&aring; datorn och, om datorn &auml;r ansluten till ett n&auml;tverk, till andra datorer i n&auml;tverket.'},
+      {type:'p',text:'Virus kan orsaka en rad olika skador: de kan radera eller kryptera filer, &auml;ndra systeminst&auml;llningar, &ouml;ppna bakd&ouml;rrar f&ouml;r angripare eller anv&auml;nda den infekterade datorn f&ouml;r att sprida sig vidare. Moderna virus &auml;r ofta polymorfiska, vilket inneb&auml;r att de kan &auml;ndra sin kod f&ouml;r att undvika uppt&auml;ckt av antivirusprogram.'},
+      {type:'h3',text:'Maskar (Worms) &ndash; Sj&auml;lvspridande hot'},
+      {type:'p',text:'Till skillnad fr&aring;n virus beh&ouml;ver maskar ingen v&auml;rdfil f&ouml;r att spridas. En mask &auml;r ett frist&aring;ende program som kan sprida sig sj&auml;lvst&auml;ndigt mellan datorer och n&auml;tverk utan n&aring;gon anv&auml;ndarinteraktion. En mask som infekterar en dator kan inom n&aring;gra minuter sprida sig till hundratals eller tusentals andra datorer inom samma n&auml;tverk.'},
+      {type:'table',headers:['Egenskap','Virus','Mask'],rows:[['Spridning','Beh&ouml;ver v&auml;rdfil och anv&auml;ndaraktivitet','Sprider sig sj&auml;lvst&auml;ndigt via n&auml;tverk'],['Frist&aring;ende','Nej, beh&ouml;ver en v&auml;rdfil','Ja, &auml;r ett eget program'],['Spridningshastighet','Relativt l&aring;ngsammare','Kan spridas extremt snabbt']]},
+      {type:'quiz',q:'Vad &auml;r den avg&ouml;rande skillnaden mellan ett virus och en mask?',opts:['Virus &auml;r alltid farligare','En mask kan sprida sig sj&auml;lvst&auml;ndigt utan anv&auml;ndarinteraktion, ett virus beh&ouml;ver en v&auml;rdfil','Maskar anv&auml;nds bara av statssponsrade hackare','Det finns ingen skillnad'],c:1,ok:'Korrekt! Maskar kan sprida sig sj&auml;lvst&auml;ndigt via n&auml;tverk utan att anv&auml;ndaren beh&ouml;ver g&ouml;ra n&aring;got, medan virus beh&ouml;ver en v&auml;rdfil och aktiveras n&auml;r anv&auml;ndaren &ouml;ppnar den infekterade filen.',bad:'Den avg&ouml;rande skillnaden &auml;r att maskar kan sprida sig sj&auml;lvst&auml;ndigt via n&auml;tverk utan anv&auml;ndarinteraktion. Virus beh&ouml;ver en v&auml;rdfil och aktiveras n&auml;r anv&auml;ndaren &ouml;ppnar den infekterade filen.'}
+    ]);}},
+    {title:'Trojaner, Spyware och Ransomware',content:function(){return buildSection([
+      {type:'intro',text:'Utanf&ouml;r virus och maskar finns det flera andra typer av malware som anv&auml;nds av cyberkriminella. Trojaner, spyware och ransomware &auml;r tre av de mest f&ouml;rekommande och skadliga typerna som drabbar b&aring;de privatpersoner och organisationer dagligen.'},
+      {type:'h3',text:'Trojaner &ndash; Det dolda hotet'},
+      {type:'p',text:'En trojan &auml;r uppkallad efter den trojanska h&auml;sten i den grekiska mytologin. Precis som den trojanska h&auml;sten d&ouml;ljer soldater inuti sig, d&ouml;ljer en trojan skadlig kod inuti ett till synes legitimt och anv&auml;ndbart program. Anv&auml;ndaren luras att installera trojanen frivilligt, i tron att det &auml;r ett legitimt program. Trojaner kan anv&auml;ndas f&ouml;r att &ouml;ppna bakd&ouml;rrar f&ouml;r angripare, ladda ner annan malware, stj&auml;la l&ouml;senord och bankuppgifter, eller ge angriparen fullst&auml;ndig kontroll &ouml;ver den infekterade datorn.'},
+      {type:'h3',text:'Spyware &ndash; Den tysta &ouml;vervakaren'},
+      {type:'p',text:'Spyware &auml;r programvara som i hemlighet &ouml;vervakar anv&auml;ndarens aktiviteter och samlar in k&auml;nslig information utan anv&auml;ndarens vetskap eller samtycke. Spyware kan registrera tangenttryckningar (keylogging), ta sk&auml;rmbilder, spela in ljud och video via mikrofon och kamera, och &ouml;verf&ouml;ra all insamlad information till angriparen. Det anv&auml;nds f&ouml;r att stj&auml;la l&ouml;senord, bankuppgifter, kreditkortsnummer och annan k&auml;nslig information.'},
+      {type:'h3',text:'Ransomware &ndash; Det moderna utpressningsverktyget'},
+      {type:'p',text:'Ransomware &auml;r en av de mest allvarliga och snabbast v&auml;xande formerna av malware. Programmet krypterar filer eller hela system med stark kryptering och angriparna kr&auml;ver sedan betalning &ndash; vanligtvis i kryptovaluta som Bitcoin &ndash; f&ouml;r att l&auml;mna ut dekrypteringsnyckeln. Utan nyckeln &auml;r filerna i praktiken f&ouml;rlorade. Moderna ransomware-grupper anv&auml;nder "dubbel utpressning": de hotar b&aring;de att inte ge tillbaka krypteringsnyckeln och att publicera den stulna datan offentligt.'},
+      {type:'callout-red',title:'Betala aldrig l&ouml;sensumman!',text:'Att betala l&ouml;sensumman garanterar inte att du f&aring;r tillbaka dina filer. Angriparna kan ta pengarna och f&ouml;rsvinna, eller kr&auml;va mer pengar. Betalning finansierar dessutom kriminell verksamhet och g&ouml;r dig till ett attraktivt m&aring;l f&ouml;r framtida attacker. Kontakta ist&auml;llet IT-support och brottsutredande myndigheter.'},
+      {type:'quiz',q:'Vad &auml;r det viktigaste sk&auml;let till att INTE betala l&ouml;sensumman vid en ransomware-attack?',opts:['Det &auml;r f&ouml;r dyrt','Betalning garanterar inte att du f&aring;r tillbaka dina filer och finansierar kriminell verksamhet','Det &auml;r olagligt att betala','Angriparna accepterar inte betalning'],c:1,ok:'Korrekt! Att betala l&ouml;sensumman garanterar inte att du f&aring;r tillbaka dina filer. Angriparna kan ta pengarna och f&ouml;rsvinna. Dessutom finansierar betalning kriminell verksamhet.',bad:'Det viktigaste sk&auml;let &auml;r att betalning inte garanterar att du f&aring;r tillbaka dina filer, och att det finansierar kriminell verksamhet.'}
+    ]);}},
+    {title:'Skydd mot malware',content:function(){return buildSection([
+      {type:'intro',text:'Skyddet mot malware kr&auml;ver en kombination av tekniska l&ouml;sningar och s&auml;kerhetsmedvetna beteenden. Ingen enskild &aring;tg&auml;rd ger fullst&auml;ndigt skydd &ndash; det &auml;r kombinationen av flera lager av s&auml;kerhet som ger det b&auml;sta skyddet. Detta kallas djupg&aring;ende f&ouml;rsvar (defense in depth).'},
+      {type:'h3',text:'Tekniska skydds&aring;tg&auml;rder'},
+      {type:'p',text:'Antivirusprogram och EDR-l&ouml;sningar (Endpoint Detection and Response) &auml;r grundl&auml;ggande verktyg f&ouml;r att uppt&auml;cka och blockera malware. Moderna s&auml;kerhetsl&ouml;sningar anv&auml;nder maskininl&auml;rning och beteendeanalys f&ouml;r att identifiera nya och ok&auml;nda hot. Det &auml;r viktigt att h&aring;lla s&auml;kerhetsprogramvaran uppdaterad s&aring; att den k&auml;nner till de senaste hoten.'},
+      {type:'p',text:'Regelb&uuml;ndna uppdateringar av operativsystem och program &auml;r avg&ouml;rande. M&aring;nga malware-attacker utnyttjar k&auml;nda s&aring;rbarheter i opatchade system. N&auml;r en s&aring;rbarhet uppt&auml;cks och en patch sl&auml;pps b&ouml;r den installeras s&aring; snart som m&ouml;jligt. Angripare vet att m&aring;nga organisationer &auml;r l&aring;ngsamma med att uppdatera sina system och utnyttjar detta aktivt.'},
+      {type:'h3',text:'3-2-1-principen f&ouml;r s&auml;kerhetskopior'},
+      {type:'p',text:'S&auml;kerhetskopior &auml;r det viktigaste skyddet mot ransomware och andra former av malware som f&ouml;rst&ouml;r eller krypterar data. 3-2-1-principen &auml;r en bepr&ouml;vad metod: 3 kopior av informationen, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats. Det &auml;r lika viktigt att regelb&uuml;ndet testa att s&auml;kerhetskopior faktiskt fungerar och kan &aring;terst&auml;llas.'},
+      {type:'h3',text:'Beteendem&auml;ssiga skydds&aring;tg&auml;rder'},
+      {type:'list',items:['&Ouml;ppna aldrig bilagor fr&aring;n ok&auml;nda avs&auml;ndare','Ladda bara ner program fr&aring;n officiella k&auml;llor','Anslut aldrig ok&auml;nda USB-minnen till din dator','H&aring;ll alla program uppdaterade','Anv&auml;nd ett bra antivirusprogram','Begr&auml;nsa anv&auml;ndarbeh&ouml;righeter till minsta n&ouml;dv&auml;ndiga']},
+      {type:'quiz',q:'Vad inneb&auml;r 3-2-1-principen f&ouml;r s&auml;kerhetskopior?',opts:['3 anv&auml;ndare, 2 l&ouml;senord, 1 s&auml;kerhetskopia','3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan plats','3 s&auml;kerhetskopior per dag, 2 per vecka, 1 per m&aring;nad','3 program, 2 brandv&auml;ggar, 1 antivirusl&ouml;sning'],c:1,ok:'Korrekt! 3-2-1-principen: 3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats. Offline-kopian &auml;r s&auml;rskilt viktig eftersom ransomware kan kryptera anslutna n&auml;tverksenheter.',bad:'3-2-1-principen: 3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; Malware',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'Malware &auml;r ett samlingsnamn f&ouml;r skadlig programvara. Virus beh&ouml;ver v&auml;rdfil och anv&auml;ndaraktivitet. Maskar sprider sig sj&auml;lvst&auml;ndigt via n&auml;tverk. Trojaner d&ouml;ljer sig som legitima program. Spyware &ouml;vervakar i hemlighet. Ransomware krypterar och kr&auml;ver l&ouml;sensumma. Skydda dig med uppdateringar, antivirus, 3-2-1-backup och goda vanor.'},
+      {type:'quiz',q:'Vilket p&aring;st&aring;ende om ransomware &auml;r korrekt?',opts:['Ransomware sprider sig alltid via USB-minnen','Att betala l&ouml;sensumman &auml;r alltid den b&auml;sta l&ouml;sningen','Ransomware krypterar filer och kr&auml;ver betalning, men betalning garanterar inte &aring;terst&auml;llning','Ransomware kan bara drabba stora f&ouml;retag'],c:2,ok:'Korrekt! Ransomware krypterar filer och kr&auml;ver betalning, men att betala garanterar inte att du f&aring;r tillbaka dina filer. Det b&auml;sta skyddet &auml;r regelb&uuml;ndna s&auml;kerhetskopior.',bad:'Ransomware krypterar filer och kr&auml;ver betalning, men att betala garanterar inte &aring;terst&auml;llning. Det b&auml;sta skyddet &auml;r regelb&uuml;ndna s&auml;kerhetskopior.'}
+    ]);}},
+  ]
+};
+
+LESSONS.phishing={
+  title:'Phishing &amp; Social ingenj&ouml;rskonst',
+  sections:[
+    {title:'Vad &auml;r phishing och social ingenj&ouml;rskonst?',content:function(){return buildSection([
+      {type:'intro',text:'Phishing &auml;r en av de vanligaste och mest effektiva metoderna f&ouml;r cyberattacker. Till skillnad fr&aring;n tekniska attacker som utnyttjar s&aring;rbarheter i programvara, riktar sig phishing mot den m&auml;nskliga faktorn &ndash; v&aring;ra instinkter, k&auml;nslor och beteenden. Angriparna utnyttjar f&ouml;rtroende, stress, nyfikenhet och r&auml;dsla f&ouml;r att manipulera oss att g&ouml;ra saker vi normalt inte skulle g&ouml;ra.'},
+      {type:'p',text:'Social ingenj&ouml;rskonst (social engineering) &auml;r det bredare begreppet f&ouml;r psykologisk manipulation i syfte att f&aring; tillg&aring;ng till information eller system. Phishing &auml;r en form av social ingenj&ouml;rskonst som sker via digitala kanaler. Angriparna beh&ouml;ver inte hacka sig in i ett system om de kan lura en anv&auml;ndare att frivilligt l&auml;mna ut sina inloggningsuppgifter eller installera skadlig programvara.'},
+      {type:'p',text:'Statistiken &auml;r alarmerande: &ouml;ver 80% av alla s&auml;kerhetsincidenter b&ouml;rjar med phishing. Det &auml;r den vanligaste ing&aring;ngspunkten f&ouml;r cyberkriminella, oavsett om m&aring;let &auml;r att stj&auml;la l&ouml;senord, installera ransomware eller genomf&ouml;ra ekonomiska bedr&auml;gerier.'},
+      {type:'h3',text:'Psykologiska mekanismer som angripare utnyttjar'},
+      {type:'list',items:['<strong>Auktoritet:</strong> Vi tenderar att lyda order fr&aring;n auktoritetspersoner. Angripare utger sig f&ouml;r att vara chefer, IT-support, banker eller myndigheter.','<strong>Br&aring;dska:</strong> N&auml;r vi k&auml;nner tidspress fattar vi snabbare beslut utan att t&auml;nka kritiskt. "Ditt konto st&auml;ngs inom 24 timmar!"','<strong>R&auml;dsla:</strong> Hot om negativa konsekvenser f&aring;r oss att agera utan att t&auml;nka. "Din dator &auml;r infekterad!"','<strong>Nyfikenhet:</strong> Vi vill veta vad som finns bakom en l&auml;nk eller i en bilaga.','<strong>Beg&auml;r:</strong> Erbjudanden om priser, rabatter eller m&ouml;jligheter lockar oss att klicka.']},
+      {type:'callout-red',title:'Varningssignaler f&ouml;r phishing',text:'Stress eller tidspress. Beg&auml;ran om l&ouml;senord eller kortuppgifter. Ovanliga l&auml;nkar eller dom&auml;ner. Ok&auml;nd avs&auml;ndare. Stavfel eller konstigt spr&aring;k. Ouppmanade bilagor. Uppmaning att kringg&aring; ordin&auml;ra rutiner.'},
+      {type:'quiz',q:'Vilken psykologisk mekanism utnyttjar angripare n&auml;r de skriver "Ditt konto st&auml;ngs inom 24 timmar om du inte agerar nu"?',opts:['Nyfikenhet','Br&aring;dska och r&auml;dsla &ndash; de vill att du ska agera utan att t&auml;nka kritiskt','Auktoritet','Beg&auml;r'],c:1,ok:'Korrekt! Angripare anv&auml;nder br&aring;dska och r&auml;dsla f&ouml;r att f&aring; dig att agera snabbt utan att t&auml;nka kritiskt. N&auml;r vi k&auml;nner tidspress och r&auml;dsla f&ouml;r negativa konsekvenser &auml;r vi mer ben&auml;gna att g&ouml;ra misstag.',bad:'Angripare anv&auml;nder br&aring;dska och r&auml;dsla f&ouml;r att f&aring; dig att agera snabbt utan att t&auml;nka kritiskt.'}
+    ]);}},
+    {title:'Typer av phishingattacker',content:function(){return buildSection([
+      {type:'intro',text:'Phishing tar m&aring;nga olika former och anv&auml;nder olika kommunikationskanaler. Det &auml;r viktigt att k&auml;nna till de vanligaste typerna f&ouml;r att kunna identifiera och undvika dem.'},
+      {type:'h3',text:'E-postphishing och Spear phishing'},
+      {type:'p',text:'E-postphishing &auml;r den vanligaste formen av phishing. Angriparen skickar ett e-postmeddelande som ser ut att komma fr&aring;n en betrodd k&auml;lla &ndash; en bank, ett f&ouml;retag, en myndighet eller en kollega. Spear phishing &auml;r en mer riktad form d&auml;r angriparen anpassar meddelandet specifikt f&ouml;r m&aring;let baserat p&aring; insamlad information fr&aring;n sociala medier och andra k&auml;llor.'},
+      {type:'h3',text:'VD-bedr&auml;geri (CEO Fraud / BEC)'},
+      {type:'p',text:'VD-bedr&auml;geri, ocks&aring; k&auml;nt som Business Email Compromise (BEC), &auml;r en av de mest kostsamma formerna av phishing. Angriparen utger sig f&ouml;r att vara f&ouml;retagets VD eller en annan h&ouml;gre chef och skickar ett br&aring;dskande e-postmeddelande till ekonomiavdelningen med en beg&auml;ran om att genomf&ouml;ra en &ouml;verf&ouml;ring. Meddelandet &auml;r utformat f&ouml;r att skapa br&aring;dska och f&aring; mottagaren att kringg&aring; normala godk&auml;nnandeprocesser.'},
+      {type:'h3',text:'Smishing, Vishing och Quishing'},
+      {type:'p',text:'Smishing (SMS-phishing) anv&auml;nder textmeddelanden f&ouml;r att lura offer. Vanliga exempel inkluderar falska paketleveransmeddelanden och bankvarningar. Vishing (voice phishing) sker via telefonsamtal d&auml;r angriparen utger sig f&ouml;r att vara fr&aring;n IT-support, banken eller Skatteverket. Quishing (QR-phishing) anv&auml;nder falska QR-koder f&ouml;r att leda offer till skadliga webbplatser.'},
+      {type:'h3',text:'Leverant&ouml;rsbedr&auml;gerier och Rekryteringsbedr&auml;gerier'},
+      {type:'p',text:'Leverant&ouml;rsbedr&auml;gerier inneb&auml;r att angriparen utger sig f&ouml;r att vara en befintlig leverant&ouml;r och informerar om att bankkontouppgifterna har &auml;ndrats. Rekryteringsbedr&auml;gerier anv&auml;nder falska jobberbjudanden f&ouml;r att lura offer att l&auml;mna ut personuppgifter eller betala f&ouml;r "utbildning".'},
+      {type:'quiz',q:'Vad &auml;r spear phishing?',opts:['Phishing via SMS','En riktad phishingattack d&auml;r meddelandet anpassas specifikt f&ouml;r m&aring;let baserat p&aring; insamlad information','Phishing via telefonsamtal','En attack mot fiskeindustrin'],c:1,ok:'Korrekt! Spear phishing &auml;r en riktad form av phishing d&auml;r angriparen anpassar meddelandet specifikt f&ouml;r m&aring;let. Angriparen samlar in information om offret fr&aring;n sociala medier och andra k&auml;llor f&ouml;r att g&ouml;ra attacken mer trovärdigt.',bad:'Spear phishing &auml;r en riktad form av phishing d&auml;r angriparen anpassar meddelandet specifikt f&ouml;r m&aring;let.'}
+    ]);}},
+    {title:'Hur identifierar och skyddar du dig mot phishing?',content:function(){return buildSection([
+      {type:'intro',text:'Att k&auml;nna igen phishing &auml;r avg&ouml;rande f&ouml;r att skydda sig. Det kr&auml;ver b&aring;de kunskap om varningssignaler och goda vanor n&auml;r det g&auml;ller att hantera e-post, SMS och telefonsamtal.'},
+      {type:'h3',text:'Kontrollera avs&auml;ndaren noggrant'},
+      {type:'p',text:'Det viktigaste steget &auml;r att kontrollera avs&auml;ndarens e-postadress noggrant. Angripare anv&auml;nder ofta dom&auml;ner som liknar legitima dom&auml;ner men med sm&aring; skillnader: "microsoft-support.net" ist&auml;llet f&ouml;r "microsoft.com", eller "swedbank-secure.se" ist&auml;llet f&ouml;r "swedbank.se". Kontrollera alltid hela e-postadressen, inte bara visningsnamnet. Hovra &ouml;ver l&auml;nkar (utan att klicka) f&ouml;r att se den verkliga URL:en.'},
+      {type:'h3',text:'Verifiera via separat kanal'},
+      {type:'p',text:'Om du f&aring;r ett ovanligt eller br&aring;dskande meddelande &ndash; s&auml;rskilt om det beg&auml;r betalning, l&ouml;senord eller annan k&auml;nslig information &ndash; verifiera alltid via en separat kanal. Ring personen eller organisationen direkt p&aring; ett k&auml;nt telefonnummer (inte numret i meddelandet). Kom ih&aring;g: legitima organisationer beg&auml;r aldrig l&ouml;senord, kreditkortsuppgifter eller BankID-godk&auml;nnanden via e-post eller telefon.'},
+      {type:'h3',text:'Aktivera multifaktorautentisering (MFA)'},
+      {type:'p',text:'Multifaktorautentisering (MFA) &auml;r ett av de effektivaste skydden mot phishing. &Auml;ven om en angripare lyckas stj&auml;la ditt l&ouml;senord via phishing kan de inte logga in utan den andra faktorn &ndash; vanligtvis en kod fr&aring;n en autentiseringsapp eller ett SMS. Aktivera MFA p&aring; alla viktiga konton.'},
+      {type:'callout-green',title:'Goda vanor mot phishing',text:'Kontrollera alltid avs&auml;ndarens e-postadress. Hovra &ouml;ver l&auml;nkar innan du klickar. Verifiera ovanliga f&ouml;rfr&aring;gningar via separat kanal. Aktivera MFA p&aring; alla viktiga konton. Rapportera misst&auml;nkta meddelanden till IT. Var s&auml;rskilt vaksam vid stress och tidspress.'},
+      {type:'quiz',q:'Du f&aring;r ett e-postmeddelande fr&aring;n "support@swedbank-secure.net" om att ditt konto &auml;r blockerat. Vad b&ouml;r du g&ouml;ra?',opts:['Klicka p&aring; l&auml;nken i mejlet och logga in','Ringa Swedbanks officiella kundtj&auml;nstnummer och fr&aring;ga om det st&auml;mmer','Svara p&aring; mejlet och fr&aring;ga om det &auml;r &auml;kta','Ignorera mejlet'],c:1,ok:'Korrekt! Ring alltid Swedbanks officiella kundtj&auml;nstnummer f&ouml;r att verifiera. Dom&auml;nen "swedbank-secure.net" &auml;r inte Swedbanks officiella dom&auml;n &ndash; det &auml;r ett tydligt tecken p&aring; phishing.',bad:'Du b&ouml;r ringa Swedbanks officiella kundtj&auml;nstnummer f&ouml;r att verifiera. Dom&auml;nen "swedbank-secure.net" &auml;r inte Swedbanks officiella dom&auml;n (swedbank.se) &ndash; det &auml;r ett tydligt tecken p&aring; phishing.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; Phishing',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'Phishing utnyttjar psykologiska mekanismer som br&aring;dska, r&auml;dsla och auktoritet. Typer: e-postphishing, spear phishing, VD-bedr&auml;geri, smishing, vishing, quishing, leverant&ouml;rsbedr&auml;gerier och rekryteringsbedr&auml;gerier. Skydda dig: kontrollera avs&auml;ndare, verifiera via separat kanal, aktivera MFA, rapportera misst&auml;nkta meddelanden.'},
+      {type:'quiz',q:'Vad &auml;r det effektivaste tekniska skyddet mot phishing-attacker som syftar till att stj&auml;la inloggningsuppgifter?',opts:['Antivirusprogram','Multifaktorautentisering (MFA)','Brandv&auml;gg','Kryptering'],c:1,ok:'Korrekt! MFA &auml;r det effektivaste tekniska skyddet. &Auml;ven om angriparen lyckas stj&auml;la ditt l&ouml;senord kan de inte logga in utan den andra faktorn.',bad:'MFA (multifaktorautentisering) &auml;r det effektivaste tekniska skyddet. &Auml;ven om angriparen stj&auml;l ditt l&ouml;senord kan de inte logga in utan den andra faktorn.'}
+    ]);}},
+  ]
+};
+
+LESSONS.ransomware={
+  title:'Ransomware &ndash; Skydd &amp; &Aring;tg&auml;rder',
+  sections:[
+    {title:'Hur ransomware fungerar och sprids',content:function(){return buildSection([
+      {type:'intro',text:'Ransomware &auml;r idag ett av de allvarligaste cyberhoten mot b&aring;de f&ouml;retag och privatpersoner. Attackerna har blivit allt mer sofistikerade och organiserade, med kriminella grupper som erbjuder "Ransomware-as-a-Service" (RaaS) &ndash; en aff&auml;rsmodell d&auml;r kriminella kan hyra ransomware-verktyg och infrastruktur mot en andel av l&ouml;sensumman.'},
+      {type:'p',text:'En typisk ransomware-attack f&ouml;ljer ett m&ouml;nster: angriparen f&aring;r f&ouml;rst tillg&aring;ng till systemet (vanligtvis via phishing eller utnyttjande av s&aring;rbarheter), r&ouml;r sig sedan lateralt i n&auml;tverket f&ouml;r att hitta v&auml;rdefull data, exfiltrerar data (stj&auml;l en kopia), och aktiverar slutligen krypteringen. Moderna ransomware-grupper anv&auml;nder dubbel utpressning: de hotar b&aring;de att inte ge tillbaka krypteringsnyckeln och att publicera den stulna datan offentligt.'},
+      {type:'h3',text:'Hur ransomware sprids'},
+      {type:'p',text:'Den vanligaste spridningsmetoden f&ouml;r ransomware &auml;r phishing-e-post med skadliga bilagor eller l&auml;nkar. N&auml;r anv&auml;ndaren &ouml;ppnar bilagan eller klickar p&aring; l&auml;nken installeras ransomware p&aring; datorn. Andra spridningsmetoder inkluderar utnyttjande av s&aring;rbarheter i opatchade system (s&auml;rskilt RDP &ndash; Remote Desktop Protocol), komprometterade webbplatser och infekterade USB-minnen.'},
+      {type:'callout-red',title:'Vad h&auml;nder vid en ransomware-attack?',text:'1. Angriparen f&aring;r tillg&aring;ng till systemet. 2. Ransomware installeras och sprider sig i n&auml;tverket. 3. Filer krypteras med stark kryptering. 4. L&ouml;sensummekrav visas p&aring; sk&auml;rmen. 5. Angriparen kr&auml;ver betalning i kryptovaluta. 6. Utan backup &auml;r data i praktiken f&ouml;rlorad.'},
+      {type:'quiz',q:'Vad &auml;r "dubbel utpressning" i samband med ransomware?',opts:['Angriparen kr&auml;ver dubbelt s&aring; mycket pengar','Angriparen b&aring;de krypterar data och hotar att publicera stulna data offentligt','Angriparen attackerar tv&aring; f&ouml;retag samtidigt','Angriparen anv&auml;nder tv&aring; olika typer av kryptering'],c:1,ok:'Korrekt! Dubbel utpressning inneb&auml;r att angriparen b&aring;de krypterar data och stj&auml;l en kopia som de hotar att publicera offentligt. Detta &ouml;kar trycket p&aring; offret att betala, &auml;ven om de har s&auml;kerhetskopior.',bad:'Dubbel utpressning inneb&auml;r att angriparen b&aring;de krypterar data och stj&auml;l en kopia som de hotar att publicera offentligt.'}
+    ]);}},
+    {title:'Skydds&aring;tg&auml;rder mot ransomware',content:function(){return buildSection([
+      {type:'intro',text:'Skyddet mot ransomware kr&auml;ver en kombination av tekniska &aring;tg&auml;rder, organisatoriska rutiner och anv&auml;ndarutbildning. Ingen enskild &aring;tg&auml;rd ger fullst&auml;ndigt skydd, men kombinationen av flera lager av s&auml;kerhet minskar risken avsev&auml;rt.'},
+      {type:'h3',text:'S&auml;kerhetskopior &ndash; Det viktigaste skyddet'},
+      {type:'p',text:'Regelb&uuml;ndna s&auml;kerhetskopior &auml;r det viktigaste skyddet mot ransomware. Med fungerande s&auml;kerhetskopior kan du &aring;terst&auml;lla dina data utan att betala l&ouml;sensumman. F&ouml;lj 3-2-1-principen: 3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats. Det &auml;r avg&ouml;rande att offline-kopian verkligen &auml;r offline &ndash; inte ansluten till n&auml;tverket. Ransomware kan kryptera alla anslutna n&auml;tverksenheter och molntj&auml;nster som synkroniseras automatiskt.'},
+      {type:'h3',text:'Multifaktorautentisering och beh&ouml;righetsstyrning'},
+      {type:'p',text:'Multifaktorautentisering (MFA) f&ouml;rsv&aring;rar kontokapningar som &auml;r en vanlig ing&aring;ngspunkt f&ouml;r ransomware. Aktivera MFA p&aring; alla konton, s&auml;rskilt administrativa konton och fj&auml;rr&aring;tkomstl&ouml;sningar som RDP och VPN. Begr&auml;nsa anv&auml;ndarbeh&ouml;righeter till minsta n&ouml;dv&auml;ndiga &ndash; om en anv&auml;ndare med begr&auml;nsade r&auml;ttigheter drabbas av ransomware begr&auml;nsas skadan.'},
+      {type:'h3',text:'Uppdateringar och patchhantering'},
+      {type:'p',text:'M&aring;nga ransomware-attacker utnyttjar k&auml;nda s&aring;rbarheter i opatchade system. Det ber&ouml;mda WannaCry-utbrottet 2017 utnyttjade en s&aring;rbarhet i Windows som Microsoft hade sl&auml;ppt en patch f&ouml;r tv&aring; m&aring;nader tidigare. Implementera en strukturerad patchhanteringsprocess som s&auml;kerst&auml;ller att s&auml;kerhetsuppdateringar installeras snabbt.'},
+      {type:'callout-green',title:'Checklista f&ouml;r ransomware-skydd',text:'Regelb&uuml;ndna s&auml;kerhetskopior (3-2-1-principen). Testa &aring;terst&auml;llning regelb&uuml;ndet. Aktivera MFA p&aring; alla konton. Begr&auml;nsa anv&auml;ndarbeh&ouml;righeter. H&aring;ll alla system uppdaterade. Anv&auml;nd antivirus och EDR. Segmentera n&auml;tverket. Utbilda anv&auml;ndare om phishing. Ha en incidentresponsplan.'},
+      {type:'quiz',q:'Varf&ouml;r &auml;r det viktigt att ha en offline-kopia av s&auml;kerhetskopior?',opts:['Det &auml;r billigare','Ransomware kan kryptera anslutna n&auml;tverksenheter och molntj&auml;nster, men inte offline-kopior','Offline-kopior &auml;r snabbare att &aring;terst&auml;lla','Det &auml;r ett lagkrav'],c:1,ok:'Korrekt! Ransomware kan kryptera alla anslutna n&auml;tverksenheter och molntj&auml;nster. En offline-kopia som inte &auml;r ansluten till n&auml;tverket &auml;r immun mot ransomware.',bad:'Ransomware kan kryptera alla anslutna n&auml;tverksenheter och molntj&auml;nster. En offline-kopia som inte &auml;r ansluten till n&auml;tverket &auml;r immun mot ransomware.'}
+    ]);}},
+    {title:'Vad g&ouml;r du om du drabbas?',content:function(){return buildSection([
+      {type:'intro',text:'Trots alla f&ouml;rebyggande &aring;tg&auml;rder kan en ransomware-attack &auml;nd&aring; lyckas. Det &auml;r d&auml;rf&ouml;r viktigt att ha en incidentresponsplan och veta exakt vad du ska g&ouml;ra om du drabbas.'},
+      {type:'h3',text:'Omedelbara &aring;tg&auml;rder'},
+      {type:'p',text:'Om du misstänker att din dator &auml;r infekterad med ransomware, agera omedelbart. Koppla bort datorn fr&aring;n n&auml;tverket (dra ur n&auml;tverkskabeln och st&auml;ng av WiFi) f&ouml;r att f&ouml;rhindra att ransomware sprider sig till andra datorer och n&auml;tverksenheter. Kontakta omedelbart IT-avdelningen eller en IT-s&auml;kerhetsexpert. Rapportera incidenten till ledningen och kontakta Polisen och CERT-SE.'},
+      {type:'callout-red',title:'Betala ALDRIG l&ouml;sensumman',text:'Betalning garanterar inte &aring;terst&auml;llning. Det finansierar kriminell verksamhet. Det g&ouml;r dig till ett attraktivt m&aring;l f&ouml;r framtida attacker. Kontakta ist&auml;llet IT-support, Polisen och CERT-SE. Kontrollera om det finns gratis dekrypteringsverktyg p&aring; nomoreransom.org.'},
+      {type:'quiz',q:'Vad &auml;r det f&ouml;rsta du b&ouml;r g&ouml;ra om du misstänker ransomware?',opts:['Betala l&ouml;sensumman omedelbart','Koppla bort datorn fr&aring;n n&auml;tverket f&ouml;r att f&ouml;rhindra spridning','Starta om datorn','Installera ett antivirusprogram'],c:1,ok:'Korrekt! Det f&ouml;rsta du b&ouml;r g&ouml;ra &auml;r att koppla bort datorn fr&aring;n n&auml;tverket f&ouml;r att f&ouml;rhindra att ransomware sprider sig till andra datorer och n&auml;tverksenheter.',bad:'Det f&ouml;rsta du b&ouml;r g&ouml;ra &auml;r att koppla bort datorn fr&aring;n n&auml;tverket f&ouml;r att f&ouml;rhindra spridning. Kontakta sedan IT-avdelningen. Betala aldrig l&ouml;sensumman.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; Ransomware',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'Ransomware krypterar filer och kr&auml;ver l&ouml;sensumma. Moderna attacker anv&auml;nder dubbel utpressning. Sprids via phishing, s&aring;rbarheter och RDP. Skydda dig med 3-2-1-backup, MFA, uppdateringar och utbildning. Vid attack: koppla bort fr&aring;n n&auml;tverket, kontakta IT och Polisen. Betala aldrig l&ouml;sensumman.'},
+      {type:'quiz',q:'Vad inneb&auml;r 3-2-1-principen f&ouml;r s&auml;kerhetskopior?',opts:['3 anv&auml;ndare, 2 l&ouml;senord, 1 s&auml;kerhetskopia','3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan plats','3 s&auml;kerhetskopior per dag','3 program, 2 brandv&auml;ggar, 1 antivirusl&ouml;sning'],c:1,ok:'Korrekt! 3-2-1-principen: 3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats.',bad:'3-2-1-principen: 3 kopior av data, p&aring; 2 olika lagringsmedier, varav 1 kopia offline eller p&aring; annan geografisk plats.'}
+    ]);}},
+  ]
+};
+
+LESSONS.natverk={
+  title:'N&auml;tverksintr&aring;ng &amp; Attacker',
+  sections:[
+    {title:'Man-in-the-Middle och DDoS-attacker',content:function(){return buildSection([
+      {type:'intro',text:'N&auml;tverksattacker riktar sig mot kommunikationsinfrastrukturen och de system som &auml;r anslutna till internet. Till skillnad fr&aring;n malware-attacker som riktar sig mot enskilda enheter, syftar n&auml;tverksattacker ofta till att avlyssna kommunikation, st&ouml;ra tj&auml;nster eller f&aring; tillg&aring;ng till n&auml;tverket f&ouml;r vidare attacker.'},
+      {type:'h3',text:'Man-in-the-Middle (MitM) &ndash; Avlyssning av kommunikation'},
+      {type:'p',text:'En Man-in-the-Middle-attack (MitM) inneb&auml;r att angriparen placerar sig mellan tv&aring; kommunicerande parter och avlyssnar eller manipulerar kommunikationen utan att n&aring;gon av parterna &auml;r medveten om det. MitM-attacker kan genomf&ouml;ras via os&auml;kra WiFi-n&auml;tverk (angriparen skapar ett falskt WiFi-n&auml;tverk som offer ansluter till), via ARP-spoofing eller via DNS-spoofing. Konsekvenserna kan inkludera stj&auml;ld inloggningsinformation, manipulerade transaktioner och avlyssnad kommunikation.'},
+      {type:'h3',text:'DDoS-attacker &ndash; &Ouml;verbelastning av tj&auml;nster'},
+      {type:'p',text:'En Distributed Denial of Service (DDoS)-attack syftar till att g&ouml;ra en webbplats, tj&auml;nst eller n&auml;tverk otillg&auml;ngligt genom att &ouml;verbelasta det med trafik. Angriparen anv&auml;nder vanligtvis ett botnet &ndash; ett n&auml;tverk av infekterade datorer (zombies) som kontrolleras av angriparen &ndash; f&ouml;r att skicka enorma m&auml;ngder trafik mot m&aring;let. DDoS-attacker kan vara f&ouml;r&ouml;dande f&ouml;r f&ouml;retag som &auml;r beroende av sin onlinen&auml;rvaro.'},
+      {type:'quiz',q:'Vad &auml;r ett botnet i samband med DDoS-attacker?',opts:['En typ av antivirusprogram','Ett n&auml;tverk av infekterade datorer som kontrolleras av angriparen f&ouml;r att genomf&ouml;ra attacker','En brandv&auml;ggsl&ouml;sning','En s&auml;ker kommunikationskanal'],c:1,ok:'Korrekt! Ett botnet &auml;r ett n&auml;tverk av infekterade datorer (zombies) som kontrolleras av angriparen. Dessa datorer anv&auml;nds f&ouml;r att skicka enorma m&auml;ngder trafik mot m&aring;let vid DDoS-attacker.',bad:'Ett botnet &auml;r ett n&auml;tverk av infekterade datorer som kontrolleras av angriparen. Dessa datorer anv&auml;nds f&ouml;r att genomf&ouml;ra DDoS-attacker utan att &auml;garnas vetskap.'}
+    ]);}},
+    {title:'Exploatering av s&aring;rbarheter och Zero-Day',content:function(){return buildSection([
+      {type:'intro',text:'Alla program och operativsystem inneh&aring;ller s&aring;rbarheter &ndash; brister i koden som kan utnyttjas av angripare. Att h&aring;lla system uppdaterade &auml;r en av de viktigaste s&auml;kerhets&aring;tg&auml;rderna, men det r&auml;cker inte alltid. Zero-Day-s&aring;rbarheter &auml;r brister som &auml;nnu inte &auml;r k&auml;nda av leverant&ouml;ren och d&auml;rf&ouml;r inte har &aring;tg&auml;rdats.'},
+      {type:'h3',text:'Exploatering av k&auml;nda s&aring;rbarheter'},
+      {type:'p',text:'N&auml;r en s&aring;rbarhet uppt&auml;cks och en patch sl&auml;pps av leverant&ouml;ren publiceras information om s&aring;rbarheten. Detta inneb&auml;r att angripare nu vet exakt vad de ska leta efter i opatchade system. Studier visar att angripare b&ouml;rjar utnyttja k&auml;nda s&aring;rbarheter inom timmar eller dagar efter att en patch sl&auml;ppts. Det &auml;r d&auml;rf&ouml;r avg&ouml;rande att installera s&auml;kerhetsuppdateringar s&aring; snabbt som m&ouml;jligt.'},
+      {type:'h3',text:'Zero-Day-s&aring;rbarheter &ndash; Det ok&auml;nda hotet'},
+      {type:'p',text:'En Zero-Day-s&aring;rbarhet &auml;r en s&auml;kerhetsbrist som &auml;r ok&auml;nd f&ouml;r leverant&ouml;ren och d&auml;rf&ouml;r inte har &aring;tg&auml;rdats. Angripare som uppt&auml;cker eller k&ouml;per Zero-Day-s&aring;rbarheter kan utnyttja dem utan att offren har n&aring;got s&auml;tt att skydda sig med patchar. Zero-Day-s&aring;rbarheter &auml;r extremt v&auml;rdefulla p&aring; den kriminella marknaden och anv&auml;nds ofta av statssponsrade hackare f&ouml;r sofistikerade attacker mot h&ouml;gv&auml;rdiga m&aring;l.'},
+      {type:'callout-blue',title:'Skydd mot s&aring;rbarhetsexploatering',text:'H&aring;ll alla system uppdaterade. Implementera djupg&aring;ende f&ouml;rsvar med flera s&auml;kerhetslager. Anv&auml;nd intrångsdetekteringssystem (IDS/IPS). Segmentera n&auml;tverket f&ouml;r att begr&auml;nsa spridning. &Ouml;vervaka f&ouml;r ovanlig aktivitet. Genomf&ouml;r regelb&uuml;ndna s&aring;rbarhetsanalyser.'},
+      {type:'quiz',q:'Varf&ouml;r &auml;r Zero-Day-s&aring;rbarheter s&auml;rskilt farliga?',opts:['De &auml;r alltid mer tekniskt avancerade','De &auml;r ok&auml;nda f&ouml;r leverant&ouml;ren och d&auml;rf&ouml;r finns det ingen patch att installera','De kan bara utnyttjas av statssponsrade hackare','De p&aring;verkar bara &auml;ldre operativsystem'],c:1,ok:'Korrekt! Zero-Day-s&aring;rbarheter &auml;r s&auml;rskilt farliga eftersom de &auml;r ok&auml;nda f&ouml;r leverant&ouml;ren. Det finns ingen patch att installera, vilket inneb&auml;r att alla system med den s&aring;rbara programvaran &auml;r exponerade.',bad:'Zero-Day-s&aring;rbarheter &auml;r farliga eftersom de &auml;r ok&auml;nda f&ouml;r leverant&ouml;ren. Det finns ingen patch att installera.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; N&auml;tverksintr&aring;ng',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'MitM-attacker avlyssnar kommunikation. DDoS-attacker &ouml;verbelastar tj&auml;nster med trafik. Exploatering utnyttjar s&aring;rbarheter i opatchade system. Zero-Day &auml;r ok&auml;nda brister utan tillg&auml;nglig patch. Skydda dig med uppdateringar, kryptering, n&auml;tverkssegmentering och &ouml;vervakning.'},
+      {type:'quiz',q:'Vad &auml;r det b&auml;sta skyddet mot MitM-attacker p&aring; offentliga WiFi-n&auml;tverk?',opts:['Anv&auml;nda ett starkt WiFi-l&ouml;senord','Anv&auml;nda en VPN som krypterar all trafik','Undvika att anv&auml;nda internet p&aring; offentliga platser','Anv&auml;nda en brandv&auml;gg'],c:1,ok:'Korrekt! En VPN krypterar all din internettrafik, vilket g&ouml;r det extremt sv&aring;rt f&ouml;r angripare att avlyssna din kommunikation p&aring; offentliga WiFi-n&auml;tverk.',bad:'En VPN (Virtual Private Network) &auml;r det b&auml;sta skyddet. Den krypterar all din internettrafik p&aring; offentliga WiFi-n&auml;tverk.'}
+    ]);}},
+  ]
+};
+
+LESSONS.insider={
+  title:'Insiderhot &amp; Fysisk s&auml;kerhet',
+  sections:[
+    {title:'Insiderhot &ndash; Hotet inifrån',content:function(){return buildSection([
+      {type:'intro',text:'N&auml;r vi t&auml;nker p&aring; cyberhot f&ouml;rest&auml;ller vi oss ofta externa angripare som hackar sig in i system fr&aring;n utsidan. Men en av de mest undersk&auml;ttade s&auml;kerhetsriskerna kommer fr&aring;n insidan &ndash; fr&aring;n anst&auml;llda, konsulter, leverant&ouml;rer och andra som har legitim tillg&aring;ng till organisationens system och information. Insiderhot &auml;r s&auml;rskilt sv&aring;ra att hantera eftersom insiders redan har tillg&aring;ng till system och information, k&auml;nner till organisationens rutiner och s&auml;kerhets&aring;tg&auml;rder.'},
+      {type:'h3',text:'Avsiktliga insiderhot'},
+      {type:'p',text:'Avsiktliga insiderhot uppst&aring;r n&auml;r en person med legitim tillg&aring;ng medvetet missbrukar sin position f&ouml;r att skada organisationen eller f&ouml;r personlig vinning. Motivet kan vara ekonomiskt (s&auml;lja f&ouml;retagshemligheter till konkurrenter), h&auml;mnd (missnöjd anst&auml;lld som saboterar system), ideologiskt (aktivist som l&auml;cker information) eller tvång (anst&auml;lld som utpressas av kriminella). Avsiktliga insiderhot kan orsaka enorma skador: en anst&auml;lld med tillg&aring;ng till k&auml;nslig kundinformation kan s&auml;lja denna information till kriminella.'},
+      {type:'h3',text:'Oavsiktliga insiderhot'},
+      {type:'p',text:'Oavsiktliga insiderhot &auml;r vanligare &auml;n avsiktliga och uppst&aring;r n&auml;r anst&auml;llda av misstag g&ouml;r n&aring;got som skadar s&auml;kerheten. Det kan handla om att klicka p&aring; en phishing-l&auml;nk, skicka k&auml;nslig information till fel mottagare, anv&auml;nda svaga l&ouml;senord, eller ansluta en infekterad USB-enhet till f&ouml;retagets n&auml;tverk. Oavsiktliga insiderhot &auml;r ofta ett resultat av bristande utbildning och medvetenhet.'},
+      {type:'callout-blue',title:'Skydd mot insiderhot',text:'Principen om minsta privilegium: ge anv&auml;ndare bara den tillg&aring;ng de beh&ouml;ver. Loggning och &ouml;vervakning av anv&auml;ndaraktiviteter. Regelb&uuml;nden s&auml;kerhetsutbildning. Tydliga rutiner f&ouml;r hantering av k&auml;nslig information. Bakgrundskontroller vid anst&auml;llning. Offboarding-rutiner n&auml;r anst&auml;llda slutar.'},
+      {type:'quiz',q:'Vad &auml;r principen om minsta privilegium (least privilege)?',opts:['Anst&auml;llda ska ha s&aring; f&aring; privilegier som m&ouml;jligt i samh&auml;llet','Anv&auml;ndare ska bara ha tillg&aring;ng till de system och den information de beh&ouml;ver f&ouml;r sitt arbete','Alla anst&auml;llda ska ha samma beh&ouml;righeter','Administrativa konton ska anv&auml;ndas f&ouml;r alla uppgifter'],c:1,ok:'Korrekt! Principen om minsta privilegium inneb&auml;r att anv&auml;ndare bara ska ha tillg&aring;ng till de system och den information de beh&ouml;ver f&ouml;r att utf&ouml;ra sitt arbete. Detta begr&auml;nsar skadan om ett konto komprometteras.',bad:'Principen om minsta privilegium inneb&auml;r att anv&auml;ndare bara ska ha tillg&aring;ng till de system och den information de beh&ouml;ver f&ouml;r sitt arbete.'}
+    ]);}},
+    {title:'Fysisk s&auml;kerhet',content:function(){return buildSection([
+      {type:'intro',text:'IT-s&auml;kerhet handlar inte bara om digitala hot. Fysisk s&auml;kerhet &auml;r en avg&ouml;rande del av ett heltäckande s&auml;kerhetsarbete. Om en angripare kan f&aring; fysisk tillg&aring;ng till en dator, server eller n&auml;tverksutrustning kan de kringg&aring; m&aring;nga digitala s&auml;kerhets&aring;tg&auml;rder.'},
+      {type:'h3',text:'Fysiska s&auml;kerhetshot'},
+      {type:'p',text:'St&ouml;ld av enheter &auml;r ett av de vanligaste fysiska s&auml;kerhetshoten. En stulen laptop kan inneh&aring;lla k&auml;nslig information, inloggningsuppgifter och tillg&aring;ng till f&ouml;retagets system. Om h&aring;rddisken inte &auml;r krypterad kan angriparen enkelt komma &aring;t all information p&aring; enheten. Obeh&ouml;rig fysisk tillg&aring;ng till lokaler &auml;r ett annat allvarligt hot. Tailgating &ndash; att f&ouml;lja med en beh&ouml;rig person in i en s&auml;krad lokal &ndash; &auml;r en vanlig metod f&ouml;r att f&aring; obeh&ouml;rig tillg&aring;ng.'},
+      {type:'h3',text:'Skydds&aring;tg&auml;rder f&ouml;r fysisk s&auml;kerhet'},
+      {type:'p',text:'Kryptering av h&aring;rddiskar &auml;r avg&ouml;rande f&ouml;r att skydda data p&aring; stulna enheter. Med full diskkryptering (FDE) &auml;r data p&aring; enheten ol&auml;sbar utan r&auml;tt l&ouml;senord eller krypteringsnyckel. Windows BitLocker och macOS FileVault &auml;r inbyggda krypteringsl&ouml;sningar som b&ouml;r aktiveras p&aring; alla enheter. Tillg&aring;ngskontroll till lokaler &auml;r viktigt f&ouml;r att f&ouml;rhindra obeh&ouml;rig tillg&aring;ng.'},
+      {type:'callout-green',title:'Goda vanor f&ouml;r fysisk s&auml;kerhet',text:'L&aring;s alltid sk&auml;rmen n&auml;r du l&auml;mnar datorn. Anv&auml;nd krypterade enheter. F&ouml;rvara k&auml;nsliga dokument s&auml;kert. Makulera dokument som inte l&auml;ngre beh&ouml;vs. Rapportera misst&auml;nkta personer i lokaler. Anslut aldrig ok&auml;nda USB-enheter.'},
+      {type:'quiz',q:'Varf&ouml;r &auml;r kryptering av h&aring;rddiskar s&aring; viktigt?',opts:['Det g&ouml;r datorn snabbare','Det skyddar data p&aring; enheten om den stj&auml;ls &ndash; utan r&auml;tt l&ouml;senord &auml;r data ol&auml;sbar','Det &auml;r ett lagkrav f&ouml;r alla f&ouml;retag','Det f&ouml;rhindrar virus fr&aring;n att infektera enheten'],c:1,ok:'Korrekt! Kryptering av h&aring;rddiskar skyddar data p&aring; enheten om den stj&auml;ls. Utan r&auml;tt l&ouml;senord eller krypteringsnyckel &auml;r all data p&aring; enheten ol&auml;sbar f&ouml;r angriparen.',bad:'Kryptering av h&aring;rddiskar skyddar data p&aring; enheten om den stj&auml;ls. Utan r&auml;tt l&ouml;senord &auml;r all data ol&auml;sbar f&ouml;r angriparen.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; Insiderhot &amp; Fysisk s&auml;kerhet',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'Insiderhot kan vara avsiktliga (stj&auml;ld, sabotage) eller oavsiktliga (misstag, bristande kunskap). Skydda dig med principen om minsta privilegium, loggning och utbildning. Fysisk s&auml;kerhet &auml;r lika viktig som digital s&auml;kerhet. Kryptera enheter, kontrollera tillg&aring;ng och rapportera misst&auml;nkt aktivitet.'},
+      {type:'quiz',q:'Vad &auml;r det vanligaste insiderhotet?',opts:['Avsiktlig informationsstj&auml;ld','Oavsiktliga misstag som att klicka p&aring; phishing-l&auml;nkar eller skicka information till fel mottagare','Sabotage av IT-system','Spionage f&ouml;r utl&auml;ndska regeringar'],c:1,ok:'Korrekt! Oavsiktliga misstag &auml;r det vanligaste insiderhotet. Anst&auml;llda som klickar p&aring; phishing-l&auml;nkar, skickar k&auml;nslig information till fel mottagare eller anv&auml;nder svaga l&ouml;senord orsakar fler s&auml;kerhetsincidenter &auml;n avsiktliga insiderhot.',bad:'Oavsiktliga misstag &auml;r faktiskt det vanligaste insiderhotet. Anst&auml;llda som klickar p&aring; phishing-l&auml;nkar eller skickar information till fel mottagare orsakar fler incidenter &auml;n avsiktliga insiderhot.'}
+    ]);}},
+  ]
+};
+
+LESSONS.sakerhet={
+  title:'S&auml;kerhetsmedvetenhet',
+  sections:[
+    {title:'M&auml;nniskan &ndash; Den viktigaste s&auml;kerhetsfaktorn',content:function(){return buildSection([
+      {type:'intro',text:'Tekniska s&auml;kerhetsl&ouml;sningar &auml;r viktiga, men de &auml;r inte tillr&auml;ckliga p&aring; egen hand. M&auml;nniskan &auml;r ofta b&aring;de den svagaste l&auml;nken och den starkaste f&ouml;rsvararen i s&auml;kerhetskedjan. En v&auml;lutbildad och medveten anv&auml;ndare kan uppt&auml;cka och f&ouml;rhindra attacker som de mest avancerade tekniska systemen missar. Studier visar att &ouml;ver 90% av alla s&auml;kerhetsincidenter involverar en m&auml;nsklig faktor.'},
+      {type:'p',text:'S&auml;kerhetsmedvetenhet handlar om att alla i en organisation &ndash; fr&aring;n VD till receptionist &ndash; f&ouml;rst&aring;r de s&auml;kerhetsrisker de m&ouml;ter i sitt dagliga arbete och vet hur de ska agera f&ouml;r att minimera dessa risker. Det handlar inte om att alla ska bli IT-s&auml;kerhetsexperter, utan om att alla ska ha tillr&auml;cklig kunskap f&ouml;r att fatta s&auml;kra beslut.'},
+      {type:'h3',text:'Viktiga utbildningsomr&aring;den'},
+      {type:'list',items:['Phishing och social manipulation &ndash; k&auml;nna igen och rapportera','L&ouml;senordshantering &ndash; starka, unika l&ouml;senord och l&ouml;senordshanterare','Multifaktorautentisering (MFA) &ndash; aktivera p&aring; alla viktiga konton','S&auml;ker anv&auml;ndning av e-post och internet','Hantering av k&auml;nslig information','Rapportering av s&auml;kerhetsincidenter','S&auml;ker anv&auml;ndning av molntj&auml;nster och mobila enheter']},
+      {type:'callout-blue',title:'Regelb&uuml;nden utbildning &auml;r avg&ouml;rande',text:'S&auml;kerhetsmedvetenhet &auml;r inte n&aring;got man uppn&aring;r en g&aring;ng f&ouml;r alla. Hotbilden f&ouml;r&auml;ndras st&auml;ndigt och nya attacker uppst&aring;r hela tiden. Regelb&uuml;nden utbildning och uppdatering av kunskaper &auml;r avg&ouml;rande f&ouml;r att h&aring;lla s&auml;kerhetsmedvetenheten p&aring; en h&ouml;g niv&aring;.'},
+      {type:'quiz',q:'Varf&ouml;r &auml;r s&auml;kerhetsmedvetenhet s&aring; viktigt trots att tekniska s&auml;kerhetsl&ouml;sningar finns?',opts:['Tekniska l&ouml;sningar &auml;r alltid tillr&auml;ckliga','&Ouml;ver 90% av alla s&auml;kerhetsincidenter involverar en m&auml;nsklig faktor som tekniska l&ouml;sningar inte kan f&ouml;rhindra','S&auml;kerhetsmedvetenhet &auml;r billigare &auml;n tekniska l&ouml;sningar','Det &auml;r ett lagkrav'],c:1,ok:'Korrekt! &Ouml;ver 90% av alla s&auml;kerhetsincidenter involverar en m&auml;nsklig faktor. Tekniska l&ouml;sningar kan inte f&ouml;rhindra att en anv&auml;ndare klickar p&aring; en phishing-l&auml;nk eller anv&auml;nder ett svagt l&ouml;senord.',bad:'&Ouml;ver 90% av alla s&auml;kerhetsincidenter involverar en m&auml;nsklig faktor. Tekniska l&ouml;sningar kan inte f&ouml;rhindra att anv&auml;ndare g&ouml;r misstag.'}
+    ]);}},
+    {title:'L&ouml;senord, MFA och s&auml;ker inloggning',content:function(){return buildSection([
+      {type:'intro',text:'L&ouml;senord &auml;r den vanligaste formen av autentisering, men de &auml;r ocks&aring; en av de svagaste l&auml;nkarna i s&auml;kerhetskedjan. Svaga l&ouml;senord, &aring;teranv&auml;ndning av l&ouml;senord och stulna l&ouml;senord &auml;r vanliga orsaker till s&auml;kerhetsincidenter. Att anv&auml;nda starka, unika l&ouml;senord och multifaktorautentisering &auml;r avg&ouml;rande f&ouml;r att skydda dina konton.'},
+      {type:'h3',text:'Vad g&ouml;r ett l&ouml;senord starkt?'},
+      {type:'p',text:'Ett starkt l&ouml;senord &auml;r l&aring;ngt (minst 12-16 tecken), komplext (blandning av stora och sm&aring; bokst&auml;ver, siffror och specialtecken), unikt (anv&auml;nds bara f&ouml;r ett konto) och slumpm&auml;ssigt (inte baserat p&aring; personlig information eller vanliga ord). Moderna l&ouml;senordsknäckningsverktyg kan testa miljarder kombinationer per sekund, vilket inneb&auml;r att korta eller enkla l&ouml;senord kan knäckas p&aring; sekunder.'},
+      {type:'p',text:'En l&ouml;senordshanterare &auml;r ett oumbärligt verktyg f&ouml;r att hantera starka, unika l&ouml;senord f&ouml;r alla dina konton. L&ouml;senordshanteraren lagrar alla dina l&ouml;senord krypterat och fyller i dem automatiskt n&auml;r du loggar in. Du beh&ouml;ver bara komma ih&aring;g ett starkt huvudl&ouml;senord.'},
+      {type:'h3',text:'Multifaktorautentisering (MFA)'},
+      {type:'p',text:'MFA l&auml;gger till ett extra lager av s&auml;kerhet utanf&ouml;r l&ouml;senordet. &Auml;ven om en angripare f&aring;r tag p&aring; ditt l&ouml;senord kan de inte logga in utan den andra faktorn. MFA kan anv&auml;nda n&aring;got du vet (l&ouml;senord), n&aring;got du har (mobiltelefon eller s&auml;kerhetsnyckel) eller n&aring;got du &auml;r (fingeravtryck eller ansiktsigenkänning). Aktivera MFA p&aring; alla viktiga konton: e-post, bank, sociala medier och arbetsrelaterade system.'},
+      {type:'quiz',q:'Vad &auml;r det viktigaste sk&auml;let till att anv&auml;nda en l&ouml;senordshanterare?',opts:['Det &auml;r snabbare att logga in','Det g&ouml;r det m&ouml;jligt att anv&auml;nda starka, unika l&ouml;senord f&ouml;r varje konto utan att beh&ouml;va komma ih&aring;g dem','Det &auml;r gratis','Det &auml;r ett lagkrav'],c:1,ok:'Korrekt! En l&ouml;senordshanterare g&ouml;r det m&ouml;jligt att anv&auml;nda starka, unika l&ouml;senord f&ouml;r varje konto utan att beh&ouml;va komma ih&aring;g dem. &Aring;teranv&auml;ndning av l&ouml;senord &auml;r en av de vanligaste orsakerna till kontokapningar.',bad:'En l&ouml;senordshanterare g&ouml;r det m&ouml;jligt att anv&auml;nda starka, unika l&ouml;senord f&ouml;r varje konto. &Aring;teranv&auml;ndning av l&ouml;senord &auml;r en av de vanligaste orsakerna till kontokapningar.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; S&auml;kerhetsmedvetenhet',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'M&auml;nniskan &auml;r f&ouml;rsta f&ouml;rsvarslinje. &Ouml;ver 90% av incidenter involverar m&auml;nsklig faktor. Utbilda regelb&uuml;ndet om phishing, l&ouml;senord och MFA. Anv&auml;nd l&ouml;senordshanterare och aktivera MFA p&aring; alla viktiga konton. Rapportera incidenter omedelbart.'},
+      {type:'quiz',q:'Vad &auml;r det effektivaste s&auml;ttet att skydda sina konton mot kontokapning?',opts:['Anv&auml;nda ett l&aring;ngt l&ouml;senord','Aktivera multifaktorautentisering (MFA) p&aring; alla viktiga konton','Byta l&ouml;senord varje m&aring;nad','Anv&auml;nda samma l&ouml;senord &ouml;verall men g&ouml;ra det komplext'],c:1,ok:'Korrekt! MFA &auml;r det effektivaste s&auml;ttet att skydda konton. &Auml;ven om angriparen stj&auml;l ditt l&ouml;senord kan de inte logga in utan den andra faktorn.',bad:'MFA (multifaktorautentisering) &auml;r det effektivaste skyddet. &Auml;ven om angriparen stj&auml;l ditt l&ouml;senord kan de inte logga in utan den andra faktorn.'}
+    ]);}},
+  ]
+};
+
+LESSONS.samhalle={
+  title:'Cybers&auml;kerhetens roll i samh&auml;llet',
+  sections:[
+    {title:'Kritisk infrastruktur och ekonomi',content:function(){return buildSection([
+      {type:'intro',text:'Cybers&auml;kerhet har blivit en grundl&auml;ggande f&ouml;ruts&auml;ttning f&ouml;r att samh&auml;llet ska fungera. Cyberattacker mot kritisk infrastruktur kan f&aring; f&ouml;r&ouml;dande konsekvenser f&ouml;r hela samh&auml;llet &ndash; inte bara f&ouml;r de direkt drabbade organisationerna. N&auml;r ett sjukhus drabbas av ransomware kan patienter f&aring; f&ouml;rs&auml;mrad v&aring;rd. N&auml;r energif&ouml;rs&ouml;rjningen st&ouml;rs kan det p&aring;verka miljoner m&auml;nniskor.'},
+      {type:'h3',text:'Kritisk infrastruktur'},
+      {type:'p',text:'Kritisk infrastruktur &auml;r de system och tj&auml;nster som &auml;r avg&ouml;rande f&ouml;r samh&auml;llets funktion. Det inkluderar energif&ouml;rs&ouml;rjning (el, gas, olja), transportsektorn (flyg, t&aring;g, v&auml;gar), telekommunikation (internet, telefoni), vattenf&ouml;rs&ouml;rjning och sjukv&aring;rd. Cyberattacker mot dessa system kan f&aring; allvarliga konsekvenser f&ouml;r m&aring;nga m&auml;nniskor och kan till och med hota nationell s&auml;kerhet.'},
+      {type:'h3',text:'Ekonomin'},
+      {type:'p',text:'Cybers&auml;kerhet &auml;r avg&ouml;rande f&ouml;r ekonomin. F&ouml;retag som drabbas av cyberattacker kan f&ouml;rlora miljarder i produktionsstopp, dataf&ouml;rlust, b&ouml;ter och skadat anseende. Enligt IBM:s Cost of a Data Breach Report uppg&aring;r den genomsnittliga kostnaden f&ouml;r ett dataintr&aring;ng till &ouml;ver 4 miljoner dollar globalt. F&ouml;r sm&aring; och medelstora f&ouml;retag kan en allvarlig cyberattack vara existenshotande.'},
+      {type:'callout-blue',title:'Cybers&auml;kerhet skyddar',text:'Kritisk infrastruktur: energi, transport, telekommunikation, sjukv&aring;rd. Ekonomin: f&ouml;retag, banker, finansiella system. Nationell s&auml;kerhet: mot cyberkrigf&ouml;ring och spionage. Personlig integritet: personuppgifter, bankuppgifter, h&auml;lsodata.'},
+      {type:'quiz',q:'Vad &auml;r kritisk infrastruktur?',opts:['Viktiga byggnader i st&auml;der','Samh&auml;llsviktiga system som energif&ouml;rs&ouml;rjning, transport och sjukv&aring;rd','Statliga myndigheter','Stora f&ouml;retag'],c:1,ok:'Korrekt! Kritisk infrastruktur inkluderar energif&ouml;rs&ouml;rjning, transportsektorn, telekommunikation, vattenf&ouml;rs&ouml;rjning och sjukv&aring;rd &ndash; system som &auml;r avg&ouml;rande f&ouml;r samh&auml;llets funktion.',bad:'Kritisk infrastruktur inkluderar energif&ouml;rs&ouml;rjning, transportsektorn, telekommunikation, vattenf&ouml;rs&ouml;rjning och sjukv&aring;rd &ndash; system som &auml;r avg&ouml;rande f&ouml;r samh&auml;llets funktion.'}
+    ]);}},
+    {title:'Nationell s&auml;kerhet och personlig integritet',content:function(){return buildSection([
+      {type:'intro',text:'Cybers&auml;kerhet &auml;r inte l&auml;ngre bara en teknisk fr&aring;ga &ndash; det &auml;r en strategisk fr&aring;ga f&ouml;r nationer och en grundl&auml;ggande r&auml;ttighet f&ouml;r individer. Statssponsrade cyberattacker, informationsp&aring;verkan och digitalt spionage &auml;r idag vanliga inslag i geopolitiska konflikter. Samtidigt &auml;r skyddet av personlig integritet i den digitala v&auml;rlden en avg&ouml;rande fr&aring;ga f&ouml;r demokrati och m&auml;nskliga r&auml;ttigheter.'},
+      {type:'h3',text:'Nationell s&auml;kerhet'},
+      {type:'p',text:'Cyberkrigf&ouml;ring &auml;r idag en integrerad del av moderna konflikter. Statssponsrade hackare anv&auml;nder cyberattacker f&ouml;r att stj&auml;la statliga hemligheter, sabotage av kritisk infrastruktur, p&aring;verka val och sprida desinformation. Sverige och andra demokratier investerar allt mer i cyberf&ouml;rsvar och cyberunderr&auml;ttelsetj&auml;nster f&ouml;r att skydda sig mot dessa hot.'},
+      {type:'h3',text:'Personlig integritet'},
+      {type:'p',text:'I den digitala v&auml;rlden genererar vi st&auml;ndigt data om oss sj&auml;lva: var vi befinner oss, vad vi k&ouml;per, vad vi s&ouml;ker p&aring;, vem vi kommunicerar med. Denna data &auml;r v&auml;rdefull &ndash; b&aring;de f&ouml;r legitima f&ouml;retag och f&ouml;r kriminella. Cybers&auml;kerhet skyddar v&aring;r personliga integritet genom att s&auml;kerst&auml;lla att v&aring;ra personuppgifter, bankuppgifter, h&auml;lsodata och inloggningsuppgifter inte hamnar i fel h&auml;nder.'},
+      {type:'callout-green',title:'Sammanfattning av hela utbildningen',text:'Du har nu slutf&ouml;rt hela IT-s&auml;kerhetsutbildningen. Du k&auml;nner till CIA-triaden, de vanligaste typerna av malware, hur phishing fungerar, hur du skyddar dig mot ransomware, vad n&auml;tverksattacker &auml;r, hur insiderhot uppst&aring;r och varf&ouml;r s&auml;kerhetsmedvetenhet &auml;r avg&ouml;rande. Anv&auml;nd denna kunskap f&ouml;r att skydda dig sj&auml;lv, din familj och din organisation.'},
+      {type:'quiz',q:'Vad &auml;r cyberkrigf&ouml;ring?',opts:['Datorspel med krigstem&auml;','Statssponsrade cyberattacker mot andra l&auml;nders infrastruktur och system','En typ av ransomware','Attacker mot privatpersoner'],c:1,ok:'Korrekt! Cyberkrigf&ouml;ring inneb&auml;r statssponsrade cyberattacker mot andra l&auml;nders infrastruktur, system och information. Det &auml;r idag en integrerad del av moderna geopolitiska konflikter.',bad:'Cyberkrigf&ouml;ring inneb&auml;r statssponsrade cyberattacker mot andra l&auml;nders infrastruktur och system. Det &auml;r idag en integrerad del av moderna geopolitiska konflikter.'}
+    ]);}},
+{title:'Kunskapskontroll 20 fragor',content:function(){return buildSection([
+      {type:'intro',text:'Testa dina kunskaper med dessa 20 fragor.'},
+      {type:'quiz',q:'1/20: Vad star C i CIA-triaden for?',opts:['Cybersakerhet','Konfidentialitet','Certifiering','Kommunikation'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'2/20: Vad star I i CIA-triaden for?',opts:['Internet','IT-sakerhet','Integritet','Identitet'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'3/20: Vad star A i CIA-triaden for?',opts:['Autentisering','Antivirus','Tillganglighet','Auktorisering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'4/20: Vilken del paverkas av DDoS?',opts:['Konfidentialitet','Integritet','Tillganglighet','Ingen del'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'5/20: Vilken del paverkas nar data manipuleras?',opts:['Konfidentialitet','Integritet','Tillganglighet','Alla delar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'6/20: Vad ar principen om minsta privilegium?',opts:['Alla ska ha samma','Anvandare ska bara ha tillgang till det de behoever','Administrativa konton alltid','Inga behorigheter'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'7/20: Vad ar ett dataintrang?',opts:['Nar en dator kraschar','Obehoriga far tillgang till skyddad information','Nar internet ar nere','Nar ett program slutar'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'8/20: Vad ar MFA?',opts:['Flera losenord','Verifiering med tva+ faktorer','Logga in fran flera enheter','Krypteringstyp'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'9/20: Varfor ar uppdateringar viktiga?',opts:['Gor program snabbare','Atgardar kanda sarbarheter','Obligatoriska','Forbattrar granssnittet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'10/20: Vad ar social ingenjoerskonst?',opts:['Bygga sociala natverk','Psykologisk manipulation for att fa information','Programmera sociala medier','Utbilda anstallda'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'11/20: Vad ar kritisk infrastruktur?',opts:['Viktiga byggnader','Samhallsviktiga system som energi och sjukvard','Statliga myndigheter','Stora foretag'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'12/20: Vad ar cyberkrigforing?',opts:['Datorspel','Statssponsrade attacker mot andra landers infrastruktur','Ransomware','Privatpersonsattacker'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'13/20: Vad ar det vanligaste motivet bakom cyberattacker?',opts:['Politisk paverkan','Ekonomisk vinning','Sabotage','Nyfikenhet'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'14/20: Exempel pa konfidentialitetsatgard?',opts:['Sakerhetskopior','Kryptering och behorighetssstyrning','Redundanta system','Digitala signaturer'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'15/20: Exempel pa integritetsatgard?',opts:['Sakerhetskopior','Redundanta system','Digitala signaturer och loggning','Kryptering'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'16/20: Exempel pa tillganglighetsatgard?',opts:['Kryptering','Behorighetssstyrning','Sakerhetskopior och redundanta system','Digitala signaturer'],c:2,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'17/20: Skillnad IT-sakerhet vs cybersakerhet?',opts:['Ingen skillnad','IT-sakerhet ar bredare, cybersakerhet fokuserar pa digitala hot','Cybersakerhet ar bredare','Bara losenord'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'18/20: Vad ar GDPR?',opts:['Antivirus','EU:s dataskyddsforordning','Sakerhetslossning','Brandvagg'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'19/20: Vad ar sakerhetsmedvetenhet?',opts:['Vara radd for datorer','Alla forstar risker och vet hur de ska agera','Bara IT-personal','Ha antivirus'],c:1,ok:'Korrekt!',bad:'Fel.'},
+      {type:'quiz',q:'20/20: Viktigaste slutsatsen fran introduktionen?',opts:['Teknik ar allt','Bade teknik och medvetna anvandare kravs','Bara for stora foretag','Omojligt att skydda sig'],c:1,ok:'Korrekt!',bad:'Fel.'}
+    ]);}},
+        {title:'Sammanfattning &ndash; Cybers&auml;kerhet i samh&auml;llet',content:function(){return buildSection([
+      {type:'callout-green',title:'Vad du har l&auml;rt dig',text:'Cybers&auml;kerhet skyddar kritisk infrastruktur, ekonomin, nationell s&auml;kerhet och personlig integritet. Cyberkrigf&ouml;ring &auml;r en del av moderna konflikter. Personlig integritet &auml;r en grundl&auml;ggande r&auml;ttighet som cybers&auml;kerhet skyddar. B&aring;de teknik och s&auml;kerhetsmedvetna anv&auml;ndare kr&auml;vs f&ouml;r en s&auml;ker digital milj&ouml;.'},
+      {type:'quiz',q:'Vad &auml;r den viktigaste slutsatsen fr&aring;n hela IT-s&auml;kerhetsutbildningen?',opts:['Teknik &auml;r det enda som beh&ouml;vs f&ouml;r s&auml;kerhet','B&aring;de tekniska skydds&aring;tg&auml;rder och s&auml;kerhetsmedvetna anv&auml;ndare kr&auml;vs f&ouml;r en s&auml;ker digital milj&ouml;','Cybers&auml;kerhet &auml;r bara f&ouml;r stora f&ouml;retag','Det &auml;r om&ouml;jligt att skydda sig mot cyberattacker'],c:1,ok:'Korrekt! B&aring;de tekniska skydds&aring;tg&auml;rder och s&auml;kerhetsmedvetna anv&auml;ndare kr&auml;vs f&ouml;r en s&auml;ker digital milj&ouml;. Teknik kan aldrig kompensera f&ouml;r bristande medvetenhet, och medvetenhet kan aldrig kompensera f&ouml;r bristande teknik.',bad:'B&aring;de tekniska skydds&aring;tg&auml;rder och s&auml;kerhetsmedvetna anv&auml;ndare kr&auml;vs f&ouml;r en s&auml;ker digital milj&ouml;. Teknik och m&auml;nsklig medvetenhet m&aring;ste samverka.'}
+    ]);}},
+  ]
+};
+// LESSON VIEWER FUNCTIONS
+function openLesson(cid,sidx){
+  _cid=cid;_sidx=sidx||0;
+  if(!_done[cid])_done[cid]={};
+  renderLesson();
+  var v=document.getElementById('lessonViewer');
+  if(v){v.classList.add('open');document.body.style.overflow='hidden';}
+}
+function closeLesson(){
+  document.getElementById('lessonViewer').classList.remove('open');
+  document.body.style.overflow='';
+}
+function renderLesson(){
+  var lesson=LESSONS[_cid];
+  if(!lesson)return;
+  var sec=lesson.sections[_sidx];
+  var total=lesson.sections.length;
+  var done=_done[_cid]||{};
+  var doneCount=Object.keys(done).length;
+  var pct=Math.round((_sidx/total)*100);
+  document.getElementById('lesson-title-bar').textContent=lesson.title+' – '+sec.title;
+  document.getElementById('lesson-prog').style.width=pct+'%';
+  document.getElementById('lesson-prog-lbl').textContent=doneCount+'/'+total;
+  // Sidebar
+  var sb=document.getElementById('lesson-sidebar');
+  if(sb){
+    sb.innerHTML='';
+    lesson.sections.forEach(function(s,i){
+      var isDone=!!done[i],isCur=i===_sidx;
+      var nc=isDone?'sb-done':isCur?'sb-cur':'sb-free';
+      var ni=isDone?'&#10003;':(i+1);
+      var item=document.createElement('div');
+      item.className='lesson-sb-item'+(isCur?' active':'');
+      item.innerHTML='<div class="lesson-sb-num '+nc+'">'+ni+'</div>'
+        +'<div><div class="lesson-sb-name">'+s.title+'</div></div>';
+      (function(ci,si){item.onclick=function(){_sidx=si;renderLesson();var m=document.getElementById('lesson-main');if(m)m.scrollTop=0;};})(_cid,i);
+      sb.appendChild(item);
+    });
+  }
+  // Main content
+  var main=document.getElementById('lesson-main');
+  if(main){
+    var html='<div class="lesson-content">';
+    html+='<div class="lc-tag">&#128214; Avsnitt '+(_sidx+1)+' av '+total+'</div>';
+    html+='<div class="lc-title">'+sec.title+'</div>';
+    html+='<div class="lc-meta"><span>&#128218; '+lesson.title+'</span></div>';
+    html+=sec.content();
+    html+='<button class="btn-done" onclick="completeSection()">&#9989; Markera som klar &ndash; G&aring; vidare</button>';
+    html+='</div>';
+    main.innerHTML=html;
+    main.scrollTop=0;
+  }
+}
+function completeSection(){
+  if(!_done[_cid])_done[_cid]={};
+  _done[_cid][_sidx]=true;
+  showToast('Avsnitt klart!','Bra jobbat! Forts&auml;tt till n&auml;sta avsnitt.');
+  var lesson=LESSONS[_cid];
+  if(lesson&&_sidx<lesson.sections.length-1){
+    _sidx++;
+    renderLesson();
+    var m=document.getElementById('lesson-main');
+    if(m)m.scrollTop=0;
+  }else{
+    showToast('Modul klar!','Grattis! Du har slutf&ouml;rt alla avsnitt i denna modul!');
+    closeLesson();
+  }
+}
+
+// KEYBOARD
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    if(document.getElementById('lessonViewer').classList.contains('open')){closeLesson();return;}
+  }
+});
+
+setTimeout(function(){showToast('V&auml;lkommen till AsterIT!','Utforska v&aring;r kompletta IT-s&auml;kerhetsutbildning');},1000);
+</script>
+</body>
+</html>
